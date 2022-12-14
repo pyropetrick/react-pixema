@@ -8,10 +8,12 @@ ${resetCSS};
 body {
   color: ${Color.PRIMARY_TEXT};
   background-color: ${Color.PRIMARY_BG};
+  height: 100%;
 }
 html {
   font-family: 'Exo 2', sans-serif;
   font-style: normal;
+  height:100%;
 }
 html[theme=dark] {
   ${themeDark}
@@ -24,26 +26,4 @@ body {
     display: none;
   }
 }
-`;
-
-export const AppWrapper = styled.div`
-  /* height: 100vh; */
-  padding: 60px;
-  padding-top: 40px;
-  display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 146px;
-  ${Media.MD} {
-    padding: 40px;
-    height: 100%;
-    grid-template-columns: 1fr;
-  }
-  ${Media.SM} {
-    padding: 32px 24px 48px;
-  }
-`;
-export const MainView = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 56px;
 `;
