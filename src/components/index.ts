@@ -14,3 +14,4 @@ export * from "./MovieList/MovieList";
 export * from "./Profile/Profile";
 export * from "./Header/Header";
 export * from "./SideBar/SideBar";
+export * from "./MainLayout/MainLayout";
