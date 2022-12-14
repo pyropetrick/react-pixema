@@ -1,8 +1,6 @@
-import { AppWrapper, MainView } from "ui";
 import { useEffect } from "react";
-import { AppRouter, Header } from "components";
+import { AppRouter } from "components";
 import { BrowserRouter } from "react-router-dom";
-import { SideBar } from "./components/SideBar/SideBar";
 import { getTheme, useAppSelector } from "store";
 
 export const App = () => {
@@ -11,13 +9,7 @@ export const App = () => {
 
   return (
     <BrowserRouter>
-      <AppWrapper>
-        <SideBar />
-        <MainView>
-          <Header />
-          <AppRouter />
-        </MainView>
-      </AppWrapper>
+      <AppRouter />
     </BrowserRouter>
   );
 };
