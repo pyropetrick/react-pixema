@@ -1,4 +1,4 @@
-import { Button, Label, MainLayout, Title } from "components";
+import { Button, Label, MainLayout, Switch, Title } from "components";
 import { ChangeEvent } from "react";
 import { getTheme, toggleTheme, useAppDispatch, useAppSelector } from "store";
 import { Input, StyledFormSettings, GroupButton, FormCard, DescSpan } from "./styles";
@@ -39,12 +39,7 @@ export const Settings = () => {
           <Label text="Dark">
             <DescSpan>Use dark theme</DescSpan>
           </Label>
-          <Input
-            type="checkbox"
-            style={{ justifySelf: "end" }}
-            onChange={handleTheme}
-            checked={inputChecked}
-          />
+          <Switch onChange={handleTheme} checked={inputChecked} />
         </FormCard>
         <GroupButton>
           <Button
