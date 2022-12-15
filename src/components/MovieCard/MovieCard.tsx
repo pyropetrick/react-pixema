@@ -1,5 +1,5 @@
-import { Path } from "config";
-import { Link } from "react-router-dom";
+import { ROUTE } from "router";
+import { generatePath, Link } from "react-router-dom";
 import { StyledMovieCard, Poster, Title } from "./styles";
 
 interface IProps {
@@ -10,7 +10,7 @@ interface IProps {
 export const MovieCard = ({ id, title, img }: IProps) => {
   return (
     <StyledMovieCard>
-      <Link to={`${Path.MOVIE}${id}`}>
+      <Link to={generatePath(ROUTE.MOVIE, { id })}>
         <Poster src={img} alt={`poster ${title}`} />
         <Title>{title}</Title>
       </Link>
