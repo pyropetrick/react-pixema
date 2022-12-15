@@ -1,12 +1,12 @@
-import { MenuLink } from "..";
-import { Path } from "../../config";
+import { MenuLink } from "components";
+import { ROUTE } from "router";
 import { StyledMenuNav } from "./styles";
 
 const navs = [
-  { to: Path.HOME, title: "Home" },
-  { to: Path.TRENDS, title: "Trends" },
-  { to: Path.FAVORITES, title: "Favorites" },
-  { to: Path.SETTINGS, title: "Settings" },
+  { to: ROUTE.HOME, title: "Home" },
+  { to: ROUTE.TRENDS, title: "Trends" },
+  { to: ROUTE.FAVORITES, title: "Favorites" },
+  { to: ROUTE.SETTINGS, title: "Settings" },
 ];
 const options = [
   { value: "movies", label: "Movies" },

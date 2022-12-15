@@ -1,5 +1,5 @@
-import { NavLink } from "react-router-dom";
-import { activeStyle, StyledNavItem } from "./styles";
+import { useMatch } from "react-router";
+import { StyledNavLink } from "./styles";
 
 interface IProps {
   title: string;
@@ -7,11 +7,10 @@ interface IProps {
 }
 
 export const MenuLink = ({ title, to }: IProps) => {
+  const isActive = useMatch(to);
   return (
-    <StyledNavItem>
-      <NavLink to={to} style={({ isActive }) => (isActive ? activeStyle : undefined)}>
-        {title}
-      </NavLink>
-    </StyledNavItem>
+    <StyledNavLink to={to} $isActive={isActive}>
+      {title}
+    </StyledNavLink>
   );
 };
