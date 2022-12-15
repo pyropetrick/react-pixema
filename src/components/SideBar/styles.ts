@@ -21,5 +21,5 @@ export const Image = styled.img`
 export const Copyright = styled.p`
   ${typography.b};
   color: ${Color.LIGHT};
-  align-self: end;
+  align-self: center;
 `;

@@ -8,7 +8,7 @@ type TypeButton = "button" | "submit" | "reset";
 interface IProps {
   text: string;
   variant: VariantButton;
-  onClick: () => void;
+  onClick?: () => void;
   type?: TypeButton;
   style?: CSSObject;
 }
