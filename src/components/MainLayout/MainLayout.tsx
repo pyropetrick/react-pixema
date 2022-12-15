@@ -1,18 +1,14 @@
 import { Header, SideBar } from "components";
-import { ReactNode } from "react";
+import { Outlet } from "react-router-dom";
 import { Content, StyledMainLayout } from "./styles";
 
-interface IProps {
-  children: ReactNode;
-}
-
-export const MainLayout = ({ children }: IProps) => {
+export const MainLayout = () => {
   return (
     <StyledMainLayout>
       <SideBar />
       <Content>
         <Header />
-        {children}
+        <Outlet />
       </Content>
     </StyledMainLayout>
   );
