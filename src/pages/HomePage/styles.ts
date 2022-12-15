@@ -4,7 +4,7 @@ import { Media } from "ui";
 export const StyledHome = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  overflow-y: auto;
   & button {
     align-self: center;
     margin-top: 64px;
