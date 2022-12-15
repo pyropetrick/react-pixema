@@ -1,4 +1,5 @@
 export * from "./Title/Title";
+export * from "./Switch/Switch";
 export * from "./Search/Search";
 export * from "./Label/Label";
 export * from "./LoadingBar/LoadingBar";
@@ -15,3 +16,4 @@ export * from "./Profile/Profile";
 export * from "./Header/Header";
 export * from "./SideBar/SideBar";
 export * from "./MainLayout/MainLayout";
+export * from "./AuthLayout/AuthLayout";
