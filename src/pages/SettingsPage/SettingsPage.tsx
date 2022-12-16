@@ -1,9 +1,16 @@
 import { Button, Label, Switch, Title } from "components";
-import { ISettingsData } from "pages";
 import { ChangeEvent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { getTheme, toggleTheme, useAppDispatch, useAppSelector } from "store";
-import { Input, StyledFormSettings, GroupButton, FormCard, DescSpan } from "./styles";
+import { Input } from "ui";
+import { GroupButton, FormCard, DescSpan, FormSettings } from "./styles";
+interface ISettingsData {
+  name: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+  passwordNew: string;
+}
 
 export const SettingsPage = () => {
   const { theme } = useAppSelector(getTheme);
@@ -34,7 +41,7 @@ export const SettingsPage = () => {
   };
   const onReset = () => reset();
   return (
-    <StyledFormSettings onSubmit={handleSubmit(onSubmit)}>
+    <FormSettings onSubmit={handleSubmit(onSubmit)}>
       <Title variant="h2" text="Profile" />
       <FormCard>
         <Label text="Name">
@@ -50,6 +57,7 @@ export const SettingsPage = () => {
           <Input
             placeholder="Your password"
             type="password"
+            $error={errors.password && true}
             {...register("password", { required: true })}
           />
         </Label>
@@ -57,6 +65,7 @@ export const SettingsPage = () => {
           <Input
             placeholder="New password"
             type="password"
+            $error={errors.passwordNew && true}
             {...register("passwordNew", { required: true })}
           />
         </Label>
@@ -64,6 +73,7 @@ export const SettingsPage = () => {
           <Input
             placeholder="Confirm password"
             type="password"
+            $error={errors.passwordConfirm && true}
             {...register("passwordConfirm", { required: true })}
           />
         </Label>
@@ -79,6 +89,6 @@ export const SettingsPage = () => {
         <Button type="button" text="Cancel" variant="secondary" onClick={onReset} />
         <Button type="submit" text="Save" variant="primary" />
       </GroupButton>
-    </StyledFormSettings>
+    </FormSettings>
   );
 };

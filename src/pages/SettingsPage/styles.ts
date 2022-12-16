@@ -1,12 +1,8 @@
 import styled from "styled-components";
 import { Color } from "config";
-import { InputCSS, Media, typography } from "ui";
+import { Media, typography } from "ui";
 
-interface IProps {
-  error?: boolean;
-}
-
-export const StyledFormSettings = styled.form`
+export const FormSettings = styled.form`
   display: grid;
   grid-template-columns: 1fr;
   max-width: 1186px;
@@ -26,11 +22,6 @@ export const FormCard = styled.div`
     margin-bottom: 32px;
     grid-template-columns: 1fr;
   }
-`;
-
-export const Input = styled.input`
-  ${InputCSS};
-  border-color: ${(props: IProps) => props.error && Color.ERROR};
 `;
 
 export const Title = styled.h2`
