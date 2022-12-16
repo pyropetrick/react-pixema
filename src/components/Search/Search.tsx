@@ -1,5 +1,5 @@
-import { StyledSearch } from "./styles";
 import { ChangeEvent } from "react";
+import { Input } from "ui";
 
 interface IProps {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
@@ -8,12 +8,6 @@ interface IProps {
 
 export const Search = ({ onChange, value }: IProps) => {
   return (
-    <StyledSearch
-      onChange={onChange}
-      value={value}
-      name="search"
-      type="search"
-      placeholder="Search"
-    />
+    <Input onChange={onChange} value={value} name="search" type="search" placeholder="Search" />
   );
 };

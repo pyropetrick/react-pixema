@@ -10,14 +10,6 @@ export const StyledSideBar = styled.aside`
   }
 `;
 
-export const Image = styled.img`
-  width: 158px;
-  height: 40px;
-  ${Media.SM} {
-    width: 147px;
-    height: 38px;
-  }
-`;
 export const Copyright = styled.p`
   ${typography.b};
   color: ${Color.LIGHT};
