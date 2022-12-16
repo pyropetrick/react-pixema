@@ -12,8 +12,6 @@ import {
 import { createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 import { ROUTE } from "router";
 
-console.log(ROUTE.HOME);
-
 export const router = createBrowserRouter(
   createRoutesFromElements(
     <Route errorElement={<ErrorPage />}>
