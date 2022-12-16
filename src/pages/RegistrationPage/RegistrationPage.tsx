@@ -27,7 +27,6 @@ export const RegistrationPage = () => {
     passwordConfirm,
   }) => {
     if (password === passwordConfirm) {
-      console.log(name, lastname, password, email);
     }
   };
 
