@@ -1,13 +1,15 @@
-import { css } from "styled-components";
-import { Color } from "../config";
+import styled from "styled-components";
+import { Color } from "config";
+import { Media } from "ui";
 
-export const InputCSS = css`
+export const Input = styled.input<{ $error?: boolean }>`
   padding: 16px;
   padding-left: 20px;
   background-color: ${Color.SECONDARY_BG};
   border: 2px solid transparent;
   border-radius: 10px;
   color: ${Color.PRIMARY_TEXT};
+  border-color: ${({ $error }) => $error && Color.ERROR};
   &::placeholder {
     color: ${Color.SECONDARY};
   }
@@ -22,5 +24,14 @@ export const InputCSS = css`
   }
   html[theme="light"] & {
     border: 2px solid ${Color.LIGHT};
+  }
+`;
+
+export const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  ${Media.SM} {
+    gap: 20px;
   }
 `;
