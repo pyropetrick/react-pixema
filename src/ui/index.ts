@@ -4,3 +4,4 @@ export * from "./typography";
 export * from "./theme";
 export * from "./globalStyles";
 export * from "./input";
+export * from "./form";
