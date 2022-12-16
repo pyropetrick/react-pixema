@@ -1,6 +1,7 @@
 import { AuthLayout, MainLayout } from "components";
 import {
   DetailsMoviePage,
+  ErrorPage,
   FavoritesPage,
   HomePage,
   LoginPage,
@@ -15,7 +16,7 @@ console.log(ROUTE.HOME);
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route>
+    <Route errorElement={<ErrorPage />}>
       <Route path={ROUTE.HOME} element={<MainLayout />}>
         <Route index path={ROUTE.HOME} element={<HomePage />} />
         <Route path={ROUTE.SETTINGS} element={<SettingsPage />} />
@@ -23,7 +24,7 @@ export const router = createBrowserRouter(
         <Route path={ROUTE.TRENDS} element={<TrendsPage />} />
         <Route path={ROUTE.MOVIE} element={<DetailsMoviePage />} />
       </Route>
-      <Route path="/auth/" element={<AuthLayout />}>
+      <Route path={ROUTE.HOME} element={<AuthLayout />}>
         <Route path={ROUTE.REGISTRATION} element={<RegistrationPage />} />
         <Route path={ROUTE.LOGIN} element={<LoginPage />} />
       </Route>
