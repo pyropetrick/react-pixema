@@ -32,9 +32,4 @@ export const Poster = styled.img`
 `;
 export const Title = styled.h6`
   ${typography.s2};
-  transition: 0.3s color ease-in-out;
-  &:hover {
-    color: ${Color.PRIMARY};
-    cursor: pointer;
-  }
 `;

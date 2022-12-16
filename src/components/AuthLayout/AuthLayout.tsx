@@ -1,14 +1,11 @@
-import { StyledAuthLayout, Image, Content, Copyright } from "./styles";
-import logoLight from "assets/img/logo-light.png";
-import logoDark from "assets/img/logo-dark.png";
-import { getTheme, useAppSelector } from "store";
+import { StyledAuthLayout, Content, Copyright } from "./styles";
 import { Outlet } from "react-router";
+import { Logo } from "components";
 
 export const AuthLayout = () => {
-  const { theme } = useAppSelector(getTheme);
   return (
     <StyledAuthLayout>
-      <Image src={theme === "dark" ? logoLight : logoDark} />
+      <Logo />
       <Content>
         <Outlet />
       </Content>
