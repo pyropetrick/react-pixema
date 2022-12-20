@@ -6,6 +6,14 @@ export const FormSettings = styled.form`
   display: grid;
   grid-template-columns: 1fr;
   max-width: 1186px;
+  height: 620px;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  ${Media.MD} {
+    height: 100%;
+  }
 `;
 
 export const FormCard = styled.div`

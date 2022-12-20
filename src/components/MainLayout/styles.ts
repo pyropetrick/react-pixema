@@ -7,7 +7,7 @@ export const StyledMainLayout = styled.div`
   display: grid;
   grid-template-columns: 160px 1fr;
   gap: 146px;
-  height: 100vh;
+  /* height: 100vh; */
   ${Media.MD} {
     padding: 40px;
     height: 100%;

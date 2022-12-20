@@ -67,7 +67,7 @@ export interface IMovieInfo {
   title: string;
   year: string;
   released: string;
-  genre: string;
+  genres: string[];
   director: string;
   writer: string;
   actors: string;
@@ -80,4 +80,5 @@ export interface IMovieInfo {
   totalSeasons?: string;
   boxOffice?: string;
   production?: string;
+  runTime?: string;
 }
