@@ -5,6 +5,8 @@ import {
   FavoritesPage,
   HomePage,
   LoginPage,
+  PasswordNewPage,
+  PasswordResetPage,
   RegistrationPage,
   SettingsPage,
   TrendsPage,
@@ -25,8 +27,9 @@ export const router = createBrowserRouter(
       <Route path={ROUTE.HOME} element={<AuthLayout />}>
         <Route path={ROUTE.REGISTRATION} element={<RegistrationPage />} />
         <Route path={ROUTE.LOGIN} element={<LoginPage />} />
+        <Route path={ROUTE.RESET_PASSWORD} element={<PasswordResetPage />} />
+        <Route path={ROUTE.NEW_PASSWORD} element={<PasswordNewPage />} />
       </Route>
-      <Route errorElement />
     </Route>,
   ),
 );
