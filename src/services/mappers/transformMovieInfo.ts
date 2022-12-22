@@ -5,7 +5,7 @@ export const transformMovieInfo = (movieInfo: IMovieInfoAPI): IMovieInfo => ({
   actors: movieInfo.Actors,
   released: movieInfo.Released,
   year: movieInfo.Year,
-  genre: movieInfo.Genre,
+  genres: movieInfo.Genre.split(","),
   director: movieInfo.Director,
   writer: movieInfo.Writer,
   plot: movieInfo.Plot,
@@ -17,4 +17,5 @@ export const transformMovieInfo = (movieInfo: IMovieInfoAPI): IMovieInfo => ({
   totalSeasons: movieInfo.totalSeasons,
   boxOffice: movieInfo.BoxOffice,
   production: movieInfo.Production,
+  runTime: movieInfo.Runtime,
 });
