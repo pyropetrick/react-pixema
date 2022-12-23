@@ -16,15 +16,15 @@ import { ROUTE } from "router";
 
 export const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route errorElement={<ErrorPage />}>
-      <Route path={ROUTE.HOME} element={<MainLayout />}>
+    <Route path={ROUTE.HOME} errorElement={<ErrorPage />}>
+      <Route element={<MainLayout />}>
         <Route index path={ROUTE.HOME} element={<HomePage />} />
         <Route path={ROUTE.SETTINGS} element={<SettingsPage />} />
         <Route path={ROUTE.FAVORITES} element={<FavoritesPage />} />
         <Route path={ROUTE.TRENDS} element={<TrendsPage />} />
         <Route path={ROUTE.MOVIE} element={<DetailsMoviePage />} />
       </Route>
-      <Route path={ROUTE.HOME} element={<AuthLayout />}>
+      <Route element={<AuthLayout />}>
         <Route path={ROUTE.REGISTRATION} element={<RegistrationPage />} />
         <Route path={ROUTE.LOGIN} element={<LoginPage />} />
         <Route path={ROUTE.RESET_PASSWORD} element={<PasswordResetPage />} />
