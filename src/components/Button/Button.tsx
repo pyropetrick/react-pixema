@@ -1,4 +1,3 @@
-import { CSSObject } from "styled-components";
 import { StyledButton } from "./styles";
 
 export type VariantButton = "primary" | "secondary";
@@ -10,12 +9,11 @@ interface IProps {
   variant: VariantButton;
   onClick?: () => void;
   type?: TypeButton;
-  style?: CSSObject;
 }
 
-export const Button = ({ text, variant, onClick, type, style }: IProps) => {
+export const Button = ({ text, variant, onClick, type }: IProps) => {
   return (
-    <StyledButton style={style} $variant={variant} onClick={onClick} type={type}>
+    <StyledButton $variant={variant} onClick={onClick} type={type}>
       {text}
     </StyledButton>
   );
