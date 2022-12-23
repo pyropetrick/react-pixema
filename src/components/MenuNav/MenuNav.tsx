@@ -8,11 +8,13 @@ const navs = [
   { to: ROUTE.FAVORITES, title: "Favorites" },
   { to: ROUTE.SETTINGS, title: "Settings" },
 ];
+/* Future select options
 const options = [
   { value: "movies", label: "Movies" },
   { value: "series", label: "Series" },
   { value: "episode", label: "Episode" },
 ];
+*/
 
 export const MenuNav = () => {
   return (

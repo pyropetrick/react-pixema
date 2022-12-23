@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { Color } from "config";
 import { Media, typography } from "ui";
 
 export const StyledMovieCard = styled.li`
