@@ -14,8 +14,12 @@ export const PasswordNewPage = () => {
     formState: { errors },
     reset,
   } = useForm<IPasswordForm>();
+  const onSubmit = () => {
+    reset();
+  };
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <Title variant="h2" text="New password" />
       <InputGroup>
         <Label text="Password">

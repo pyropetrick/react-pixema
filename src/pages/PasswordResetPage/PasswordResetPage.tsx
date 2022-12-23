@@ -1,6 +1,6 @@
 import { Button, Label, Title } from "components";
 import { useForm } from "react-hook-form";
-import { Form, Input, InputGroup } from "ui";
+import { Form, Input } from "ui";
 
 interface IResetPasswordForm {
   email: string;
@@ -13,8 +13,11 @@ export const PasswordResetPage = () => {
     formState: { errors },
     reset,
   } = useForm<IResetPasswordForm>();
+  const onSubmit = () => {
+    reset();
+  };
   return (
-    <Form>
+    <Form onSubmit={handleSubmit(onSubmit)}>
       <Title variant="h2" text="Reset Password" />
       <Label text="Email">
         <Input

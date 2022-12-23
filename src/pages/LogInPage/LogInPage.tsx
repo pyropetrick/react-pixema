@@ -3,7 +3,6 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { ROUTE } from "router";
-import { setUser, useAppDispatch } from "store";
 import { Form, Input, InputGroup } from "ui";
 import { Text } from "./styles";
 
@@ -13,7 +12,6 @@ interface ILoginData {
 }
 
 export const LoginPage = () => {
-  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const {
     handleSubmit,

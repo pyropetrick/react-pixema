@@ -14,12 +14,7 @@ export const HomePage = () => {
       <StyledHome>
         <MovieList movies={movies} isLoading={isLoading} />
       </StyledHome>
-      <Button
-        text="Show more"
-        type="button"
-        variant="secondary"
-        onClick={() => console.log("button")}
-      />
+      <Button text="Show more" type="button" variant="secondary" onClick={() => {}} />
     </>
   );
 };
