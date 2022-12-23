@@ -1,7 +1,8 @@
 import { Button, Label, Switch, Title } from "components";
+import { getAuth, updateEmail, updatePassword, updateProfile } from "firebase/auth";
 import { ChangeEvent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { getTheme, toggleTheme, useAppDispatch, useAppSelector } from "store";
+import { getTheme, getUser, toggleTheme, useAppDispatch, useAppSelector } from "store";
 import { Input } from "ui";
 import { GroupButton, FormCard, DescSpan, FormSettings } from "./styles";
 interface ISettingsData {
@@ -14,6 +15,7 @@ interface ISettingsData {
 
 export const SettingsPage = () => {
   const { theme } = useAppSelector(getTheme);
+  const { name, email } = useAppSelector(getUser);
   const dispatch = useAppDispatch();
   const handleTheme = (event: ChangeEvent<HTMLInputElement>) => {
     event.target.checked ? dispatch(toggleTheme("dark")) : dispatch(toggleTheme("light"));
@@ -26,9 +28,9 @@ export const SettingsPage = () => {
     formState: { errors },
   } = useForm<ISettingsData>({
     mode: "onBlur",
-    defaultValues: { name: "Pavel", email: "pavel.chernenko97@gmail.com" },
+    defaultValues: { name, email },
   });
-  const onSubmit: SubmitHandler<ISettingsData> = ({
+  const onSubmit: SubmitHandler<ISettingsData> = async ({
     name,
     email,
     password,
@@ -36,7 +38,12 @@ export const SettingsPage = () => {
     passwordNew,
   }) => {
     if (passwordNew === passwordConfirm) {
-      console.log(name, email, passwordNew);
+      const auth = getAuth();
+      if (auth.currentUser) {
+        await updateProfile(auth.currentUser, { displayName: name });
+        await updateEmail(auth.currentUser, email);
+        await updatePassword(auth.currentUser, passwordNew);
+      }
     }
   };
   const onReset = () => reset();
@@ -45,7 +52,11 @@ export const SettingsPage = () => {
       <Title variant="h2" text="Profile" />
       <FormCard>
         <Label text="Name">
-          <Input placeholder="Your name" type="text" {...register("name", { required: true })} />
+          <Input
+            placeholder="Your name"
+            type="text"
+            {...register("name", { required: true, pattern: /[A-Za-z]*?s[A-Za-z]/ })}
+          />
         </Label>
         <Label text="Email">
           <Input placeholder="Your email" type="email" {...register("email", { required: true })} />

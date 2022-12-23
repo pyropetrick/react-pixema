@@ -1,32 +1,45 @@
 import { Button, Label, RouterLink, Title } from "components";
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from "firebase/auth";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 import { ROUTE } from "router";
 import { Form, Input, InputGroup } from "ui";
 import { Text } from "./styles";
 
 interface IRegistrationData {
   name: string;
-  lastname: string;
   email: string;
   password: string;
   passwordConfirm: string;
 }
 
 export const RegistrationPage = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<IRegistrationData>();
-  const onSubmit: SubmitHandler<IRegistrationData> = ({
+  } = useForm<IRegistrationData>({ mode: "onBlur" });
+  const onSubmit: SubmitHandler<IRegistrationData> = async ({
     name,
-    lastname,
     email,
     password,
     passwordConfirm,
   }) => {
     if (password === passwordConfirm) {
+      try {
+        const auth = getAuth();
+        await createUserWithEmailAndPassword(auth, email, password);
+        auth.currentUser &&
+          (await updateProfile(auth.currentUser, {
+            displayName: name,
+          }));
+        reset();
+        return navigate(ROUTE.HOME);
+      } catch (e) {
+        alert("Email already used");
+      }
     }
   };
 
@@ -39,15 +52,7 @@ export const RegistrationPage = () => {
             placeholder="Your name"
             type="text"
             $error={errors.name && true}
-            {...register("name", { required: true })}
-          />
-        </Label>
-        <Label text="Last Name">
-          <Input
-            placeholder="Your lastname"
-            type="text"
-            $error={errors.lastname && true}
-            {...register("lastname", { required: true })}
+            {...register("name", { required: true, pattern: /[A-Za-z]*?s[A-Za-z]/ })}
           />
         </Label>
         <Label text="Email">
@@ -63,7 +68,10 @@ export const RegistrationPage = () => {
             placeholder="Your password"
             type="password"
             $error={errors.password && true}
-            {...register("password", { required: true })}
+            {...register("password", {
+              required: "Password is required",
+              minLength: { value: 6, message: "Minimum characters 6" },
+            })}
           />
         </Label>
         <Label text="Confirm Password">
@@ -71,13 +79,16 @@ export const RegistrationPage = () => {
             placeholder="Confirm password"
             type="password"
             $error={errors.passwordConfirm && true}
-            {...register("passwordConfirm", { required: true })}
+            {...register("passwordConfirm", {
+              required: "Password is required",
+              minLength: { value: 6, message: "Minimum characters 6" },
+            })}
           />
         </Label>
       </InputGroup>
       <Button text="Sign up" variant="primary" type="submit" />
       <Text>
-        Already have an account? <RouterLink to={ROUTE.LOGIN}>Sign In</RouterLink>
+        Already have an account? <RouterLink to={`/${ROUTE.LOGIN}`}>Sign In</RouterLink>
       </Text>
     </Form>
   );
