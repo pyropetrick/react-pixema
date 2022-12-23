@@ -1,5 +1,5 @@
-import styled, { createGlobalStyle } from "styled-components";
-import { Media, resetCSS, themeDark, themeLight } from ".";
+import { createGlobalStyle } from "styled-components";
+import { resetCSS, themeDark, themeLight } from ".";
 import { Color } from "../config";
 
 export const GlobalStyles = createGlobalStyle`
@@ -8,7 +8,7 @@ ${resetCSS};
 body {
   color: ${Color.PRIMARY_TEXT};
   background-color: ${Color.PRIMARY_BG};
-  height: 100%;
+  /* height: 100%; */
 }
 html {
   font-family: 'Exo 2', sans-serif;
