@@ -11,7 +11,7 @@ interface IProps {
 export const MovieCard = ({ id, title, img }: IProps) => {
   return (
     <StyledMovieCard>
-      <RouterLink to={generatePath(ROUTE.MOVIE, { id })}>
+      <RouterLink to={generatePath(`/${ROUTE.MOVIE}`, { id })}>
         <Poster src={img} alt={`poster ${title}`} />
         <Title>{title}</Title>
       </RouterLink>
