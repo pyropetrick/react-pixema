@@ -1,8 +1,8 @@
 import { Button, Label, RouterLink, Title } from "components";
-import { createUserWithEmailAndPassword, getAuth, updateProfile } from "firebase/auth";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { ROUTE } from "router";
+import { getUser, signUp, useAppDispatch, useAppSelector } from "store";
 import { Form, Input, InputGroup } from "ui";
 import { Text } from "./styles";
 
@@ -15,31 +15,25 @@ interface IRegistrationData {
 
 export const RegistrationPage = () => {
   const navigate = useNavigate();
+  const { isLoading } = useAppSelector(getUser);
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<IRegistrationData>({ mode: "onBlur" });
-  const onSubmit: SubmitHandler<IRegistrationData> = async ({
+  const onSubmit: SubmitHandler<IRegistrationData> = ({
     name,
     email,
     password,
     passwordConfirm,
   }) => {
     if (password === passwordConfirm) {
-      try {
-        const auth = getAuth();
-        await createUserWithEmailAndPassword(auth, email, password);
-        auth.currentUser &&
-          (await updateProfile(auth.currentUser, {
-            displayName: name,
-          }));
+      dispatch(signUp({ name, email, password })).then((response) => {
         reset();
         return navigate(ROUTE.HOME);
-      } catch (e) {
-        alert("Email already used");
-      }
+      });
     }
   };
 

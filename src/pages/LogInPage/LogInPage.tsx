@@ -1,8 +1,8 @@
 import { Button, Label, RouterLink, Title } from "components";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { ROUTE } from "router";
+import { signIn, useAppDispatch } from "store";
 import { Form, Input, InputGroup } from "ui";
 import { Text } from "./styles";
 
@@ -13,6 +13,7 @@ interface ILoginData {
 
 export const LoginPage = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const {
     handleSubmit,
     register,
@@ -20,15 +21,10 @@ export const LoginPage = () => {
     reset,
   } = useForm<ILoginData>({ mode: "onBlur" });
 
-  const onSubmit: SubmitHandler<ILoginData> = async ({ email, password }) => {
-    try {
-      const auth = getAuth();
-      await signInWithEmailAndPassword(auth, email, password);
-      reset();
-      navigate(ROUTE.HOME);
-    } catch (e) {
-      alert("Email or password wrong");
-    }
+  const onSubmit: SubmitHandler<ILoginData> = async (dataSignIn) => {
+    dispatch(signIn(dataSignIn));
+    reset();
+    navigate(ROUTE.HOME);
   };
 
   return (
