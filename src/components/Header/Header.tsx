@@ -9,7 +9,7 @@ export const Header = () => {
   return (
     <StyledHeader>
       <Search {...search} />
-      <Profile name={name} isAuth={isAuth} />
+      <Profile name={name || ""} isAuth={isAuth} />
     </StyledHeader>
   );
 };
