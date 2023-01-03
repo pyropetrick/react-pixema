@@ -8,5 +8,5 @@ export enum ROUTE {
   MOVIE = "movie/:id",
   RESET_PASSWORD = "password/reset",
   NEW_PASSWORD = "password/new",
-  SEARCH = "search",
+  SEARCH = "search/:name",
 }
