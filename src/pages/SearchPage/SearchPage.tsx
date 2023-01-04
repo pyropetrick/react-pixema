@@ -1,7 +1,6 @@
 import { Button, MovieList } from "components";
 import { useEffect } from "react";
 import { fetchSearchMovies, getSearchMovies, useAppDispatch, useAppSelector } from "store";
-import { StyledSearch } from "./styles";
 import { useParams } from "react-router";
 
 export const SearchPage = () => {
