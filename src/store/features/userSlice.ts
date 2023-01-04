@@ -8,6 +8,7 @@ import {
   UserCredential,
   signOut,
 } from "firebase/auth";
+import { toast } from "react-toastify";
 import { FirebaseError, FirebaseErrorCode, getFirebaseErrorMessage } from "services";
 import { ISignInData, ISignUpData } from "types";
 
@@ -87,12 +88,14 @@ const user = createSlice({
         state.email = payload.email as string;
         state.name = payload.displayName as string;
         state.isAuth = true;
+        toast.success(`${state.name} sign up`);
       }
     });
     builder.addCase(signUp.rejected, (state, { payload }) => {
       state.isLoading = false;
       if (payload) {
         state.error = payload;
+        toast.error(payload);
       }
     });
     builder.addCase(signIn.pending, (state, action) => {
@@ -104,19 +107,18 @@ const user = createSlice({
         state.email = payload.user.email;
         state.name = payload.user.displayName;
         state.isAuth = true;
+        toast.success(`${state.name} sign in`);
       }
     });
     builder.addCase(signIn.rejected, (state, { payload }) => {
       state.isLoading = false;
       if (payload) {
         state.error = payload;
+        toast.error(payload);
       }
     });
-    builder.addCase(userSignOut.pending, (state, action) => {
-      state.isLoading = true;
-    });
     builder.addCase(userSignOut.fulfilled, (state, action) => {
-      state.isLoading = false;
+      toast.success("Logout is success");
       state.isAuth = false;
       state.email = "";
       state.name = "";
@@ -124,6 +126,7 @@ const user = createSlice({
     builder.addCase(userSignOut.rejected, (state, { payload }) => {
       if (payload) {
         state.error = payload;
+        toast.error(payload);
       }
     });
   },
