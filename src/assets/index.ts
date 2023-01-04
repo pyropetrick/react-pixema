@@ -3,6 +3,7 @@ import logoDark from "./img/logo-dark.png";
 import bgAuth from "./img/background-auth.png";
 import { ReactComponent as ArrowRightIcon } from "./icons/arrow-right.svg";
 import { ReactComponent as ArrowLeftIcon } from "./icons/arrow-left.svg";
+import { ReactComponent as ArrowDownIcon } from "./icons/arrow-down.svg";
 import { ReactComponent as BookMarkIcon } from "./icons/bookmark.svg";
 import { ReactComponent as BurgerIcon } from "./icons/burger-menu.svg";
 import { ReactComponent as CrossIcon } from "./icons/cross.svg";
@@ -30,4 +31,5 @@ export {
   SettingsIcon,
   ShareIcon,
   UserIcon,
+  ArrowDownIcon,
 };
