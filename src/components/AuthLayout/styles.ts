@@ -5,7 +5,7 @@ import { Media, typography } from "ui";
 export const StyledAuthLayout = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 4fr 1fr;
+  grid-template-rows: 1fr 11fr 1fr;
   grid-row-gap: 40px;
   height: 100%;
   padding: 48px 62px 64px;
@@ -17,6 +17,9 @@ export const StyledAuthLayout = styled.div`
     padding: 32px 24px 48px;
     grid-template-rows: 1fr 6fr 1fr;
     grid-row-gap: 20px;
+  }
+  a {
+    justify-self: left;
   }
 `;
 
