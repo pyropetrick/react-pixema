@@ -8,3 +8,4 @@ export * from "./LogInPage/LogInPage";
 export * from "./ErrorPage/ErrorPage";
 export * from "./PasswordNewPage/PasswordNewPage";
 export * from "./PasswordResetPage/PasswordResetPage";
+export * from "./SearchPage/SearchPage";
