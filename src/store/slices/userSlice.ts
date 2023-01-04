@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -6,6 +6,7 @@ import {
   updateProfile,
   User,
   UserCredential,
+  signOut,
 } from "firebase/auth";
 import { FirebaseError, FirebaseErrorCode, getFirebaseErrorMessage } from "services";
 import { ISignInData, ISignUpData } from "types";
@@ -18,23 +19,24 @@ interface IUser {
   error: string;
 }
 
-export const signUp = createAsyncThunk<any, ISignUpData, { rejectValue: FirebaseError }>(
-  "user/signUp",
-  async ({ email, password, name }, { rejectWithValue }) => {
-    try {
-      const auth = getAuth();
-      await createUserWithEmailAndPassword(auth, email, password);
-      auth.currentUser &&
-        (await updateProfile(auth.currentUser, {
-          displayName: name,
-        }));
-      return auth.currentUser as User;
-    } catch (error) {
-      const firebaseError = error as { errorCode: FirebaseErrorCode };
-      rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
-    }
-  },
-);
+export const signUp = createAsyncThunk<
+  User | undefined | null,
+  ISignUpData,
+  { rejectValue: FirebaseError }
+>("user/signUp", async ({ email, password, name }, { rejectWithValue }) => {
+  try {
+    const auth = getAuth();
+    await createUserWithEmailAndPassword(auth, email, password);
+    auth.currentUser &&
+      (await updateProfile(auth.currentUser, {
+        displayName: name,
+      }));
+    return auth.currentUser;
+  } catch (error) {
+    const firebaseError = error as { errorCode: FirebaseErrorCode };
+    rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
+  }
+});
 
 export const signIn = createAsyncThunk<
   UserCredential | undefined,
@@ -49,6 +51,19 @@ export const signIn = createAsyncThunk<
     rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
   }
 });
+
+export const userSignOut = createAsyncThunk<any, any, { rejectValue: FirebaseError }>(
+  "user/signOut",
+  async (_, { rejectWithValue }) => {
+    try {
+      const auth = getAuth();
+      return await signOut(auth);
+    } catch (error) {
+      const firebaseError = error as { errorCode: FirebaseErrorCode };
+      rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
+    }
+  },
+);
 
 const initialState: IUser = {
   name: "",
@@ -67,11 +82,15 @@ const user = createSlice({
       state.isLoading = true;
     });
     builder.addCase(signUp.fulfilled, (state, { payload }) => {
-      state.email = payload.email as string;
-      state.name = payload.displayName as string;
-      state.isAuth = true;
+      state.isLoading = false;
+      if (payload) {
+        state.email = payload.email as string;
+        state.name = payload.displayName as string;
+        state.isAuth = true;
+      }
     });
     builder.addCase(signUp.rejected, (state, { payload }) => {
+      state.isLoading = false;
       if (payload) {
         state.error = payload;
       }
@@ -80,6 +99,7 @@ const user = createSlice({
       state.isLoading = true;
     });
     builder.addCase(signIn.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
       if (payload) {
         state.email = payload.user.email;
         state.name = payload.user.displayName;
@@ -87,6 +107,21 @@ const user = createSlice({
       }
     });
     builder.addCase(signIn.rejected, (state, { payload }) => {
+      state.isLoading = false;
+      if (payload) {
+        state.error = payload;
+      }
+    });
+    builder.addCase(userSignOut.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(userSignOut.fulfilled, (state, action) => {
+      state.isLoading = false;
+      state.isAuth = false;
+      state.email = "";
+      state.name = "";
+    });
+    builder.addCase(userSignOut.rejected, (state, { payload }) => {
       if (payload) {
         state.error = payload;
       }
