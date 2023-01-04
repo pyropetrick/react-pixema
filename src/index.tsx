@@ -5,7 +5,7 @@ import { store } from "store";
 import { Provider } from "react-redux";
 import "react-toastify/dist/ReactToastify.css";
 import { App } from "App";
-import { Toast } from "components/Toast/Toast";
+import { Toast } from "components";
 
 const root = createRoot(document.getElementById("root") as HTMLElement);
 
