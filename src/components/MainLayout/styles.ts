@@ -4,6 +4,7 @@ import { Media } from "ui";
 export const StyledMainLayout = styled.div`
   padding: 60px;
   padding-top: 40px;
+  padding-bottom: 0;
   display: grid;
   grid-template-columns: 160px 1fr;
   gap: 146px;
