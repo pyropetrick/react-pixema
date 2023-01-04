@@ -1,4 +1,5 @@
 export * from "./Title/Title";
+export * from "./Portal/Portal";
 export * from "./RequareAuth/RequareAuth";
 export * from "./RouterLink/RouterLink";
 export * from "./Logo/Logo";
