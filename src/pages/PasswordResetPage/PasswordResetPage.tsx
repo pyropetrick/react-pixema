@@ -1,5 +1,6 @@
 import { Button, Label, Title } from "components";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { resetPassword, useAppDispatch } from "store";
 import { Form, Input } from "ui";
 
 interface IResetPasswordForm {
@@ -7,15 +8,14 @@ interface IResetPasswordForm {
 }
 
 export const PasswordResetPage = () => {
+  const dispatch = useAppDispatch();
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<IResetPasswordForm>();
-  const onSubmit = () => {
-    reset();
-  };
+  const onSubmit: SubmitHandler<IResetPasswordForm> = ({ email }) => dispatch(resetPassword(email));
+
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Title variant="h2" text="Reset Password" />
