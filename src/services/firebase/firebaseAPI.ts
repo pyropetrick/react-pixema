@@ -10,7 +10,7 @@ import {
   updatePassword,
   updateProfile,
 } from "firebase/auth";
-import { getFirestore, collection, addDoc, setDoc, doc, updateDoc } from "firebase/firestore";
+import { getFirestore, setDoc, doc, updateDoc } from "firebase/firestore";
 import { ISignInData, ISignUpData } from "./types";
 
 const app = initializeApp(firebaseConfig);
@@ -19,7 +19,7 @@ const db = getFirestore(app);
 
 const collectionUsers = (id: string) => doc(db, "users", id);
 
-const collectionFavorites = (id: string) => collection(db, "users", id, "favorites");
+// const collectionFavorites = (id: string) => collection(db, "users", id, "favorites");
 
 export const userSignUp = async (userData: ISignUpData) => {
   const { email, password, name } = userData;

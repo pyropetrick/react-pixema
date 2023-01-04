@@ -14,8 +14,6 @@ interface IRegistrationData {
 }
 
 export const RegistrationPage = () => {
-  const navigate = useNavigate();
-  const { isLoading } = useAppSelector(getUser);
   const dispatch = useAppDispatch();
   const {
     register,
@@ -32,7 +30,6 @@ export const RegistrationPage = () => {
     if (password === passwordConfirm) {
       dispatch(signUp({ name, email, password })).then((response) => {
         reset();
-        return navigate(ROUTE.HOME);
       });
     }
   };

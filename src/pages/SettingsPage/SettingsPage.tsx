@@ -1,10 +1,10 @@
 import { Button, Label, Switch, Title } from "components";
-import { getAuth, updateEmail, updatePassword, updateProfile } from "firebase/auth";
 import { ChangeEvent } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { getTheme, getUser, toggleTheme, useAppDispatch, useAppSelector } from "store";
+import { getTheme, toggleTheme, useAppDispatch, useAppSelector } from "store";
 import { Input } from "ui";
 import { GroupButton, FormCard, DescSpan, FormSettings } from "./styles";
+import { updateUserProfile } from "../../store/features/userSlice";
 interface ISettingsData {
   name: string;
   email: string;
@@ -15,7 +15,6 @@ interface ISettingsData {
 
 export const SettingsPage = () => {
   const { theme } = useAppSelector(getTheme);
-  const { name, email } = useAppSelector(getUser);
   const dispatch = useAppDispatch();
   const handleTheme = (event: ChangeEvent<HTMLInputElement>) => {
     event.target.checked ? dispatch(toggleTheme("dark")) : dispatch(toggleTheme("light"));
@@ -32,17 +31,11 @@ export const SettingsPage = () => {
   const onSubmit: SubmitHandler<ISettingsData> = async ({
     name,
     email,
-    password,
     passwordConfirm,
     passwordNew,
   }) => {
     if (passwordNew === passwordConfirm) {
-      const auth = getAuth();
-      if (auth.currentUser) {
-        await updateProfile(auth.currentUser, { displayName: name });
-        await updateEmail(auth.currentUser, email);
-        await updatePassword(auth.currentUser, passwordNew);
-      }
+      dispatch(updateUserProfile({ name, email, password: passwordNew }));
     }
   };
   const onReset = () => reset();

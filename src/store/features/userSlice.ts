@@ -29,9 +29,7 @@ export const signUp = createAsyncThunk<
   { rejectValue: FirebaseError }
 >("user/signUp", async (userData, { rejectWithValue }) => {
   try {
-    const user: IUserModel | undefined = await userSignUp(userData);
-    console.log(user);
-    return user;
+    return await userSignUp(userData);
   } catch (error) {
     const firebaseError = error as { errorCode: FirebaseErrorCode };
     rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
@@ -118,7 +116,6 @@ const user = createSlice({
     });
     builder.addCase(signUp.fulfilled, (state, { payload }) => {
       state.isLoading = false;
-      console.log(payload);
       if (payload) {
         state.name = payload.name;
         state.email = payload.email;

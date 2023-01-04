@@ -3,12 +3,12 @@ import { ROUTE } from "router";
 import { getUser, useAppSelector } from "store";
 import { StyledMenuNav } from "./styles";
 
-const navs = [
-  { to: ROUTE.HOME, title: "Home" },
-  { to: ROUTE.TRENDS, title: "Trends" },
-  { to: ROUTE.FAVORITES, title: "Favorites", isAuth: false },
-  { to: ROUTE.SETTINGS, title: "Settings", isAuth: false },
-];
+// const navs = [
+//   { to: ROUTE.HOME, title: "Home" },
+//   { to: ROUTE.TRENDS, title: "Trends" },
+//   { to: ROUTE.FAVORITES, title: "Favorites", isAuth: false },
+//   { to: ROUTE.SETTINGS, title: "Settings", isAuth: false },
+// ];
 /* Future select options
 const options = [
   { value: "movies", label: "Movies" },
