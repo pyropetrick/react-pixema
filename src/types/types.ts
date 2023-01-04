@@ -59,7 +59,7 @@ export interface IResponseSearchAPI {
 
 export interface IRequestOption {
   name: string;
-  type: string;
+  type?: string;
   year?: number;
 }
 
