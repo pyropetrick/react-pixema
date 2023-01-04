@@ -1,4 +1,5 @@
 export * from "./Title/Title";
+export * from "./RequareAuth/RequareAuth";
 export * from "./RouterLink/RouterLink";
 export * from "./Logo/Logo";
 export * from "./Switch/Switch";
