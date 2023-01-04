@@ -1,38 +1,37 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  signInWithEmailAndPassword,
-  updateProfile,
-  User,
-  UserCredential,
-  signOut,
-} from "firebase/auth";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { User } from "firebase/auth";
 import { toast } from "react-toastify";
-import { FirebaseError, FirebaseErrorCode, getFirebaseErrorMessage } from "services";
+import {
+  FirebaseError,
+  FirebaseErrorCode,
+  getFirebaseErrorMessage,
+  IUserModel,
+  resetUserPassword,
+  updateUserData,
+  userLogOut,
+  userSignIn,
+  userSignUp,
+} from "services";
 import { ISignInData, ISignUpData } from "types";
 
 interface IUser {
-  name: string | null | undefined;
-  email: string | null | undefined;
+  name: string | null;
+  email: string | null;
+  id: string | null;
   isAuth: boolean;
   isLoading: boolean;
   error: string;
 }
 
 export const signUp = createAsyncThunk<
-  User | undefined | null,
+  IUserModel | undefined,
   ISignUpData,
   { rejectValue: FirebaseError }
->("user/signUp", async ({ email, password, name }, { rejectWithValue }) => {
+>("user/signUp", async (userData, { rejectWithValue }) => {
   try {
-    const auth = getAuth();
-    await createUserWithEmailAndPassword(auth, email, password);
-    auth.currentUser &&
-      (await updateProfile(auth.currentUser, {
-        displayName: name,
-      }));
-    return auth.currentUser;
+    const user: IUserModel | undefined = await userSignUp(userData);
+    console.log(user);
+    return user;
   } catch (error) {
     const firebaseError = error as { errorCode: FirebaseErrorCode };
     rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
@@ -40,25 +39,23 @@ export const signUp = createAsyncThunk<
 });
 
 export const signIn = createAsyncThunk<
-  UserCredential | undefined,
+  IUserModel | undefined,
   ISignInData,
   { rejectValue: FirebaseError }
->("user/signIn", async ({ email, password }, { rejectWithValue }) => {
+>("user/signIn", async (userData, { rejectWithValue }) => {
   try {
-    const auth = getAuth();
-    return await signInWithEmailAndPassword(auth, email, password);
+    return await userSignIn(userData);
   } catch (error) {
     const firebaseError = error as { errorCode: FirebaseErrorCode };
     rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
   }
 });
 
-export const userSignOut = createAsyncThunk<any, any, { rejectValue: FirebaseError }>(
+export const userSignOut = createAsyncThunk<void, void, { rejectValue: FirebaseError }>(
   "user/signOut",
   async (_, { rejectWithValue }) => {
     try {
-      const auth = getAuth();
-      return await signOut(auth);
+      await userLogOut();
     } catch (error) {
       const firebaseError = error as { errorCode: FirebaseErrorCode };
       rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
@@ -66,9 +63,37 @@ export const userSignOut = createAsyncThunk<any, any, { rejectValue: FirebaseErr
   },
 );
 
+export const resetPassword = createAsyncThunk<
+  string | undefined,
+  string,
+  { rejectValue: FirebaseError }
+>("user/resetPassword", async (email, { rejectWithValue }) => {
+  try {
+    await resetUserPassword(email);
+    return email;
+  } catch (error) {
+    const firebaseError = error as { errorCode: FirebaseErrorCode };
+    rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
+  }
+});
+
+export const updateUserProfile = createAsyncThunk<
+  void,
+  ISignUpData,
+  { rejectValue: FirebaseError }
+>("user/updateProfile", async (userData, { rejectWithValue }) => {
+  try {
+    await updateUserData(userData);
+  } catch (error) {
+    const firebaseError = error as { errorCode: FirebaseErrorCode };
+    rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
+  }
+});
+
 const initialState: IUser = {
   name: "",
   email: "",
+  id: "",
   isAuth: false,
   isLoading: false,
   error: "",
@@ -77,18 +102,29 @@ const initialState: IUser = {
 const user = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    setUser: (state, { payload }: PayloadAction<User | null>) => {
+      if (payload) {
+        state.name = payload.displayName;
+        state.email = payload.email;
+        state.id = payload.uid;
+        state.isAuth = true;
+      }
+    },
+  },
   extraReducers(builder) {
     builder.addCase(signUp.pending, (state, action) => {
       state.isLoading = true;
     });
     builder.addCase(signUp.fulfilled, (state, { payload }) => {
       state.isLoading = false;
+      console.log(payload);
       if (payload) {
-        state.email = payload.email as string;
-        state.name = payload.displayName as string;
+        state.name = payload.name;
+        state.email = payload.email;
+        state.id = payload.id;
         state.isAuth = true;
-        toast.success(`${state.name} sign up`);
+        toast.success(`${state.name} is logged`);
       }
     });
     builder.addCase(signUp.rejected, (state, { payload }) => {
@@ -104,8 +140,8 @@ const user = createSlice({
     builder.addCase(signIn.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       if (payload) {
-        state.email = payload.user.email;
-        state.name = payload.user.displayName;
+        state.name = payload.name;
+        state.email = payload.email;
         state.isAuth = true;
         toast.success(`${state.name} sign in`);
       }
@@ -129,7 +165,24 @@ const user = createSlice({
         toast.error(payload);
       }
     });
+    builder.addCase(resetPassword.fulfilled, (state, { payload }) => {
+      toast.success(`You will receive an email ${payload} with a link to reset your password!`);
+    });
+    builder.addCase(resetPassword.rejected, (state, { payload }) => {
+      if (payload) {
+        toast.error(payload);
+      }
+    });
+    builder.addCase(updateUserProfile.fulfilled, (state, action) => {
+      toast.success("Your Profile updated");
+    });
+    builder.addCase(updateUserProfile.rejected, (state, { payload }) => {
+      if (payload) {
+        toast.error(payload);
+      }
+    });
   },
 });
 
 export default user.reducer;
+export const { setUser } = user.actions;
