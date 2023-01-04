@@ -16,7 +16,7 @@ export const Profile = ({ name, isAuth }: IProps) => {
   const profileNameWords = name.split(" ");
   const handleName = () => toogleDropDown();
   const handleLogout = () => {
-    dispatch(userSignOut(null));
+    dispatch(userSignOut());
     toogleDropDown();
   };
   return (
