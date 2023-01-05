@@ -5,3 +5,4 @@ export * from "./theme";
 export * from "./globalStyles";
 export * from "./input";
 export * from "./form";
+export * from "./mainPageBlock";
