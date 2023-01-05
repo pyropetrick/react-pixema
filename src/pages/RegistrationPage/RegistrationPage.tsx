@@ -2,7 +2,7 @@ import { Button, Label, RouterLink, Title } from "components";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router";
 import { ROUTE } from "router";
-import { getUser, signUp, useAppDispatch, useAppSelector } from "store";
+import { signUp, useAppDispatch } from "store";
 import { Form, Input, InputGroup } from "ui";
 import { Text } from "./styles";
 
@@ -15,6 +15,7 @@ interface IRegistrationData {
 
 export const RegistrationPage = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -30,6 +31,7 @@ export const RegistrationPage = () => {
     if (password === passwordConfirm) {
       dispatch(signUp({ name, email, password })).then((response) => {
         reset();
+        navigate(ROUTE.HOME);
       });
     }
   };

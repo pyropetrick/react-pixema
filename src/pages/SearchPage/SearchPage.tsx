@@ -7,7 +7,7 @@ import { MainPageBlock } from "ui";
 
 export const SearchPage = () => {
   const { name } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const year = searchParams.get("year");
   const type = searchParams.get("type");
   const [page, setPage] = useState<number>(1);
@@ -17,7 +17,7 @@ export const SearchPage = () => {
     if (year && type && name) {
       dispatch(fetchSearchMovies({ name, year, type, page }));
     } else name && dispatch(fetchSearchMovies({ name, page }));
-  }, [dispatch, name, page]);
+  }, [dispatch, name, page, year, type]);
   const { movies, isLoading } = useAppSelector(getSearchMovies);
   return (
     <MainPageBlock>

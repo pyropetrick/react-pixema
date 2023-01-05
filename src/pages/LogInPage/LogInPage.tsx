@@ -1,6 +1,6 @@
 import { Button, Label, RouterLink, Title } from "components";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { Route, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { ROUTE } from "router";
 import { signIn, useAppDispatch } from "store";
 import { Form, Input, InputGroup } from "ui";
