@@ -60,7 +60,7 @@ export interface IResponseSearchAPI {
 export interface IRequestOption {
   name: string;
   type?: string;
-  year?: number;
+  year?: string;
 }
 
 export interface IMovieInfo {
