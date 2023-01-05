@@ -25,6 +25,9 @@ export const Input = styled.input<{ $error?: boolean }>`
   html[theme="light"] & {
     border: 2px solid ${Color.LIGHT};
   }
+  ::-webkit-inner-spin-button {
+    display: none;
+  }
 `;
 
 export const InputGroup = styled.div`
