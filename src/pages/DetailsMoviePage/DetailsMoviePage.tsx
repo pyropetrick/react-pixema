@@ -1,10 +1,10 @@
 import { useParams } from "react-router";
-import { useAppSelector, useAppDispatch, getMovie, getMovieById } from "store";
+import { useAppSelector, useAppDispatch, getMovie, getMovieById, addFavorite } from "store";
 import { useEffect } from "react";
 import {
   Details,
-  EncyclopedicRow,
   EncyclopedicTable,
+  FavoriteButton,
   Genres,
   Plot,
   Poster,
@@ -15,14 +15,15 @@ import {
   WrapperRate,
 } from "./styles";
 import { LoadingBar, Title } from "components";
-import { IMDBIcon } from "assets";
+import { BookMarkIcon, IMDBIcon } from "assets";
+import { toast } from "react-toastify";
 
 export const DetailsMoviePage = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const { movie, isLoading } = useAppSelector(getMovie);
   useEffect(() => {
-    if (id) dispatch(getMovieById(id));
+    id && dispatch(getMovieById(id));
   }, [dispatch, id]);
   const tableValues = [
     { title: "Year", value: movie.year },
@@ -34,16 +35,21 @@ export const DetailsMoviePage = () => {
     { title: "Director", value: movie.director },
     { title: "Writers", value: movie.writer },
   ];
+  const handleFavorite = () => {
+    dispatch(addFavorite(movie));
+    toast.success(`${movie.title} add to favorites`);
+  };
   if (isLoading) return <LoadingBar />;
   return (
     <StyledDetailsMoviePage>
       <PosterWrapper>
         <Poster src={movie.poster} alt={`poster ${movie.title}`} />
+        <FavoriteButton onClick={handleFavorite}>
+          <BookMarkIcon />
+        </FavoriteButton>
       </PosterWrapper>
       <Details>
-        <Genres>
-          {movie.genres && movie.genres.map((genre) => <span key={genre}>{genre}</span>)}
-        </Genres>
+        <Genres>{movie.genres && movie.genres.map((genre) => <p key={genre}>{genre}</p>)}</Genres>
         <Title text={movie.title} variant="h1" />
         <Ratings>
           <WrapperRate $greenVariant>{movie.imdbRating}</WrapperRate>
@@ -56,10 +62,10 @@ export const DetailsMoviePage = () => {
         <EncyclopedicTable>
           <tbody>
             {tableValues.map((row) => (
-              <EncyclopedicRow key={row.title}>
+              <tr key={row.title}>
                 <TextCell variant="title">{row.title}</TextCell>
                 <TextCell>{row.value}</TextCell>
-              </EncyclopedicRow>
+              </tr>
             ))}
           </tbody>
         </EncyclopedicTable>

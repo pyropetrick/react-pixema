@@ -9,7 +9,12 @@ export const StyledDetailsMoviePage = styled.div`
 `;
 export const Details = styled.div``;
 
-export const PosterWrapper = styled.div``;
+export const PosterWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+`;
 
 export const Poster = styled.img`
   height: 356px;
@@ -17,8 +22,23 @@ export const Poster = styled.img`
   border-radius: 20px;
 `;
 
-export const Genres = styled.ul`
+export const Genres = styled.div`
   color: ${Color.LIGHT};
+  display: flex;
+  gap: 13px;
+  p {
+    position: relative;
+    &:after {
+      content: "\u2022";
+      display: block;
+      position: absolute;
+      right: -10px;
+      top: 0;
+    }
+    &:last-child:after {
+      display: none;
+    }
+  }
 `;
 
 export const WrapperRate = styled.div<{ $greenVariant?: boolean }>`
@@ -48,10 +68,33 @@ export const EncyclopedicTable = styled.table`
   border-collapse: collapse;
 `;
 
-export const EncyclopedicRow = styled.tr``;
-
 export const TextCell = styled.td<{ variant?: "title" }>`
   padding: 0 40px 20px 0;
   ${typography.b};
   color: ${({ variant }) => (variant === "title" ? Color.LIGHT : Color.PRIMARY_TEXT)};
+`;
+
+export const FavoriteButton = styled.button`
+  padding: 16px 54px;
+  background-color: ${Color.GRAPHITE};
+  border: none;
+  border-radius: 10px;
+  path {
+    transition: 0.3s fill ease-in-out;
+    fill: ${Color.LIGHT};
+  }
+  &:hover {
+    cursor: pointer;
+
+    path {
+      fill: ${Color.WHITE};
+    }
+  }
+  &:disabled {
+    background-color: ${Color.SECONDARY};
+    cursor: default;
+    path {
+      fill: ${Color.LIGHT};
+    }
+  }
 `;
