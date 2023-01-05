@@ -1,6 +1,6 @@
 import { Button, Label, RouterLink, Title } from "components";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+import { Route, useNavigate } from "react-router";
 import { ROUTE } from "router";
 import { signIn, useAppDispatch } from "store";
 import { Form, Input, InputGroup } from "ui";
@@ -46,6 +46,7 @@ export const LoginPage = () => {
             $error={errors.password && true}
             {...register("password", { required: true })}
           />
+          <RouterLink to={`/${ROUTE.RESET_PASSWORD}`}>Forgot Password?</RouterLink>
         </Label>
       </InputGroup>
       <Button text="Sign in" variant="primary" type="submit" />
