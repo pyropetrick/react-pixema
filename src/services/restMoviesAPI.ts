@@ -19,11 +19,12 @@ class restMoviesAPI {
     const { data } = await this.API.get<IMovieInfoAPI>("", { params });
     return data;
   }
-  public async getSearchMovies({ name, type, year }: IRequestOption) {
+  public async getSearchMovies({ name, type, year, page }: IRequestOption) {
     const params = {
       s: name,
       type,
       y: year,
+      page,
     };
     const { data } = await this.API.get<IResponseSearchAPI>("", { params });
     return data;
