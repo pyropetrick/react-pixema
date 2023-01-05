@@ -1,28 +1,80 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { IMovie } from "types";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { IMovieInfo } from "types";
+import { RootState } from "store";
+import {
+  addFavoriteToStore,
+  FirebaseError,
+  FirebaseErrorCode,
+  getFavoritesFromStore,
+  getFirebaseErrorMessage,
+} from "services";
+import { toast } from "react-toastify";
 
 interface IFavoritesState {
-  favorites: IMovie[] | null;
+  favorites: IMovieInfo[] | null;
+  isLoading: boolean;
 }
 
 const initialState: IFavoritesState = {
   favorites: null,
+  isLoading: false,
 };
+
+export const addFavorite = createAsyncThunk<
+  void,
+  IMovieInfo,
+  { rejectValue: FirebaseError; state: RootState }
+>("favorites/add", async (movieInfo, { rejectWithValue, getState }) => {
+  try {
+    const state = getState();
+    const { id } = state.user;
+    if (id) {
+      await addFavoriteToStore(movieInfo, id);
+    }
+  } catch (error) {
+    const firebaseError = error as { errorCode: FirebaseErrorCode };
+    rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
+  }
+});
+
+export const fetchFavorites = createAsyncThunk<
+  IMovieInfo[] | undefined,
+  void,
+  { rejectValue: FirebaseError; state: RootState }
+>("favorites/fetch", async (_, { rejectWithValue, getState }) => {
+  try {
+    const state = getState();
+    const { id } = state.user;
+    if (id) {
+      return await getFavoritesFromStore(id);
+    }
+  } catch (error) {
+    const firebaseError = error as { errorCode: FirebaseErrorCode };
+    rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
+  }
+});
 
 const favorites = createSlice({
   name: "favorites",
   initialState,
-  reducers: {
-    addFavorite: (state, { payload }: PayloadAction<IMovie>) => {
-      if (state.favorites) state.favorites.push(payload);
-    },
-    deleteFavorite: (state, { payload }: PayloadAction<string>) => {
-      if (state.favorites)
-        state.favorites = state.favorites.filter((movie) => movie.imdbID !== payload);
-    },
+  reducers: {},
+  extraReducers(builder) {
+    builder.addCase(addFavorite.fulfilled, (state, action) => {
+      toast.success("Success add to your Favorites");
+    });
+    builder.addCase(addFavorite.rejected, (state, { payload }) => {
+      if (payload) toast.error(payload);
+    });
+    builder.addCase(fetchFavorites.pending, (state, action) => {
+      state.isLoading = true;
+    });
+    builder.addCase(fetchFavorites.fulfilled, (state, { payload }) => {
+      state.isLoading = false;
+      if (payload) {
+        state.favorites = payload;
+      }
+    });
   },
 });
 
 export default favorites.reducer;
-
-export const { addFavorite, deleteFavorite } = favorites.actions;
