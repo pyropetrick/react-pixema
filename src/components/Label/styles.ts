@@ -8,4 +8,9 @@ export const StyledLabel = styled.label`
   gap: 8px;
   ${typography.s2};
   color: ${Color.PRIMARY_TEXT};
+  a {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+  }
 `;
