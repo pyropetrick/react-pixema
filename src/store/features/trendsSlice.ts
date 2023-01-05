@@ -7,11 +7,11 @@ interface ITrendsState {
   isLoading: boolean;
   error: string | null;
 }
-export const fetchTrends = createAsyncThunk<IResponseSearchAPI, null, { rejectValue: string }>(
+export const fetchTrends = createAsyncThunk<IResponseSearchAPI, number, { rejectValue: string }>(
   "trends/fetchTrends",
-  async (_, { rejectWithValue }) => {
+  async (page, { rejectWithValue }) => {
     try {
-      return await moviesApi.getSearchMovies({ name: "2022", type: "movie" });
+      return await moviesApi.getSearchMovies({ name: "superman", type: "movie", page });
     } catch (error) {
       const errorResponse = error as AxiosError;
       return rejectWithValue(errorResponse.message);
