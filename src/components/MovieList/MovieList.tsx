@@ -8,7 +8,7 @@ interface IProps {
 }
 export const MovieList = ({ movies, isLoading }: IProps) => {
   if (isLoading) return <LoadingBar />;
-  if (!!!movies) {
+  if (!movies) {
     return (
       <Fallback>
         <Image />
