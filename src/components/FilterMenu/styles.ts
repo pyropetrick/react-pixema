@@ -6,6 +6,7 @@ export const StyledFilterMenu = styled.div`
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 1001;
   min-width: 100vw;
   min-height: 100vh;
   display: grid;

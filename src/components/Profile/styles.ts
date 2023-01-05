@@ -30,6 +30,7 @@ export const DropDown = styled.div`
   position: absolute;
   top: 110%;
   left: 0;
+  z-index: 1000;
   display: flex;
   flex-direction: column;
   width: 267px;
