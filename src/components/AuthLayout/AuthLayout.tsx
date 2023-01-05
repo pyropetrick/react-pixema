@@ -5,8 +5,8 @@ import { getUser, useAppSelector } from "store";
 import { ROUTE } from "router";
 
 export const AuthLayout = () => {
-  const { isAuth } = useAppSelector(getUser);
-  if (isAuth) {
+  const { name } = useAppSelector(getUser);
+  if (name) {
     return <Navigate to={ROUTE.HOME} />;
   }
   return (

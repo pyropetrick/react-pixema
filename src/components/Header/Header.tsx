@@ -13,6 +13,7 @@ export const Header = () => {
   const [isActive, toogleFilter] = useToogle();
   useEffect(() => {
     debounceValue && navigate(generatePath(ROUTE.SEARCH, { name: debounceValue }));
+    //eslint-disable-next-line
   }, [debounceValue]);
   const { isAuth, name } = useAppSelector(getUser);
   return (
