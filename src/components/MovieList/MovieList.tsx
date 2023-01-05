@@ -1,13 +1,21 @@
-import { LoadingBar, MovieCard } from "components";
+import { LoadingBar, MovieCard, Title } from "components";
 import { IMovie } from "types";
-import { StyledMovieList } from "./styles";
+import { Fallback, StyledMovieList, Image } from "./styles";
 
 interface IProps {
-  movies: IMovie[];
+  movies: IMovie[] | null;
   isLoading: boolean;
 }
 export const MovieList = ({ movies, isLoading }: IProps) => {
   if (isLoading) return <LoadingBar />;
+  if (!!!movies) {
+    return (
+      <Fallback>
+        <Image />
+        <Title variant={"h3"} text={"Empty state text"} />
+      </Fallback>
+    );
+  }
   return (
     <StyledMovieList>
       {movies &&
