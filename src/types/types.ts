@@ -61,6 +61,7 @@ export interface IRequestOption {
   name: string;
   type?: string;
   year?: string;
+  page?: number;
 }
 
 export interface IMovieInfo {
