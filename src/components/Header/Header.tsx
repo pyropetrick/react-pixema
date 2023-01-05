@@ -1,5 +1,5 @@
-import { Profile, Search } from "components";
-import { useDebounce, useInput } from "hooks";
+import { FilterMenu, Profile, Search } from "components";
+import { useDebounce, useInput, useToogle } from "hooks";
 import { StyledHeader } from "./styles";
 import { useAppSelector, getUser } from "store";
 import { useEffect } from "react";
@@ -10,14 +10,16 @@ export const Header = () => {
   const search = useInput();
   const navigate = useNavigate();
   const debounceValue = useDebounce(search.value, 1000);
+  const [isActive, toogleFilter] = useToogle();
   useEffect(() => {
     debounceValue && navigate(generatePath(ROUTE.SEARCH, { name: debounceValue }));
   }, [debounceValue]);
   const { isAuth, name } = useAppSelector(getUser);
   return (
     <StyledHeader>
-      <Search {...search} />
+      <Search {...search} onClick={toogleFilter} />
       <Profile name={name || ""} isAuth={isAuth} />
+      {isActive && <FilterMenu toogleFilter={toogleFilter} />}
     </StyledHeader>
   );
 };
