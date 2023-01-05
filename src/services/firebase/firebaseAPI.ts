@@ -10,8 +10,17 @@ import {
   updatePassword,
   updateProfile,
 } from "firebase/auth";
-import { getFirestore, setDoc, doc, updateDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  setDoc,
+  doc,
+  updateDoc,
+  collection,
+  addDoc,
+  getDocs,
+} from "firebase/firestore";
 import { ISignInData, ISignUpData } from "./types";
+import { IMovieInfo } from "types";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -19,7 +28,7 @@ const db = getFirestore(app);
 
 const collectionUsers = (id: string) => doc(db, "users", id);
 
-// const collectionFavorites = (id: string) => collection(db, "users", id, "favorites");
+const collectionFavorites = (id: string) => collection(db, "users", id, "favorites");
 
 export const userSignUp = async (userData: ISignUpData) => {
   const { email, password, name } = userData;
@@ -63,4 +72,20 @@ export const resetUserPassword = async (email: string) => {
 
 export const userLogOut = async () => {
   await signOut(auth);
+};
+
+export const addFavoriteToStore = async (movieInfo: IMovieInfo, userId: string) => {
+  try {
+    await addDoc(collectionFavorites(userId), {
+      ...movieInfo,
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getFavoritesFromStore = async (userId: string) => {
+  const { docs } = await getDocs(collectionFavorites(userId));
+  const favorites = docs.map((doc) => doc.data());
+  return favorites as IMovieInfo[];
 };
