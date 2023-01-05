@@ -65,6 +65,7 @@ export interface IRequestOption {
 }
 
 export interface IMovieInfo {
+  imdbID: string;
   title: string;
   year: string;
   released: string;
