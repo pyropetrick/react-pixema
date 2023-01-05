@@ -22,7 +22,7 @@ import { Color } from "config";
 export const selectStyles: StylesConfig = {
   control: (styles) => ({
     ...styles,
-    background: Color.GRAPHITE,
+    background: Color.SELECT_BG,
     minHeight: "56px",
     border: "1px solid transparent",
     borderRadius: "10px",
@@ -50,13 +50,13 @@ export const selectStyles: StylesConfig = {
   menu: (styles) => ({
     ...styles,
     borderRadius: "10px",
-    background: Color.GRAPHITE,
+    background: Color.SELECT_BG,
     marginBottom: "0",
   }),
   menuList: (styles) => ({
     ...styles,
     borderRadius: "10px",
-    background: Color.GRAPHITE,
+    background: Color.SELECT_BG,
   }),
   singleValue: (styles) => ({
     ...styles,

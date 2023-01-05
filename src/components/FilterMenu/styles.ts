@@ -27,7 +27,7 @@ export const Filters = styled.form`
   display: grid;
   grid-template-rows: 50px 1fr 60px;
   grid-gap: 40px;
-  background-color: ${Color.DARK};
+  background-color: ${Color.BLOCK_BG};
   border-radius: 10px 0 0 10px;
   padding: 48px 40px;
   ${Media.SM} {
@@ -39,6 +39,10 @@ export const FilterHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  path {
+    fill: ${Color.LIGHT};
+    cursor: pointer;
+  }
 `;
 
 export const GroupButton = styled.div`

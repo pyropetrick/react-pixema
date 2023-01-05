@@ -12,7 +12,11 @@ export const MovieCard = ({ id, title, img }: IProps) => {
   return (
     <StyledMovieCard>
       <RouterLink to={generatePath(`/${ROUTE.MOVIE}`, { id })}>
-        <Poster src={img} alt={`poster ${title}`} />
+        {img === "N/A" ? (
+          <Poster src={`https://via.placeholder.com/250.png?text=${title}`} alt="fallback image" />
+        ) : (
+          <Poster src={img} alt={`poster ${title}`} />
+        )}
         <Title>{title}</Title>
       </RouterLink>
     </StyledMovieCard>
