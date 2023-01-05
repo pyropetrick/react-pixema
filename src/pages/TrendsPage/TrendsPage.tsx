@@ -1,20 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button, MovieList } from "components";
 import { useAppSelector, useAppDispatch, getTrends, fetchTrends } from "store";
-import { StyledTrends } from "./styles";
+import { MainPageBlock } from "ui";
 
 export const TrendsPage = () => {
   const { trends, isLoading } = useAppSelector(getTrends);
+  const [page, setPage] = useState<number>(1);
   const dispatch = useAppDispatch();
+  const handleShowMore = () => setPage((prevPage) => ++prevPage);
   useEffect(() => {
-    dispatch(fetchTrends(null));
-  }, [dispatch]);
+    dispatch(fetchTrends(page));
+  }, [dispatch, page]);
   return (
-    <StyledTrends>
+    <MainPageBlock>
       <MovieList movies={trends} isLoading={isLoading} />;
       {!isLoading && (
-        <Button text="Show more" type="button" variant="secondary" onClick={() => {}} />
+        <Button text="Show more" type="button" variant="secondary" onClick={handleShowMore} />
       )}
-    </StyledTrends>
+    </MainPageBlock>
   );
 };

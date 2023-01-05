@@ -1,20 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Button, MovieList } from "components";
-import { StyledHome } from "./styles";
 import { fetchHomeMovies, getMovies, useAppDispatch, useAppSelector } from "store";
+import { MainPageBlock } from "ui";
 
 export const HomePage = () => {
   const { movies, isLoading } = useAppSelector(getMovies);
   const dispatch = useAppDispatch();
+  const [page, setPage] = useState<number>(1);
+  const handleShowMore = () => setPage((prevPage) => ++prevPage);
   useEffect(() => {
-    dispatch(fetchHomeMovies({ name: "batman", type: "movie" }));
-  }, [dispatch]);
+    dispatch(fetchHomeMovies({ name: "batman", type: "movie", page }));
+  }, [dispatch, page]);
   return (
-    <StyledHome>
+    <MainPageBlock>
       <MovieList movies={movies} isLoading={isLoading} />
       {!isLoading && (
-        <Button text="Show more" type="button" variant="secondary" onClick={() => {}} />
+        <Button text="Show more" type="button" variant="secondary" onClick={handleShowMore} />
       )}
-    </StyledHome>
+    </MainPageBlock>
   );
 };
