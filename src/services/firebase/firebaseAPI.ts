@@ -75,13 +75,9 @@ export const userLogOut = async () => {
 };
 
 export const addFavoriteToStore = async (movieInfo: IMovieInfo, userId: string) => {
-  try {
-    await addDoc(collectionFavorites(userId), {
-      ...movieInfo,
-    });
-  } catch (error) {
-    console.log(error);
-  }
+  await addDoc(collectionFavorites(userId), {
+    ...movieInfo,
+  });
 };
 
 export const getFavoritesFromStore = async (userId: string) => {
