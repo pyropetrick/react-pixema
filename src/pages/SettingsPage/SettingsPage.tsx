@@ -28,7 +28,7 @@ export const SettingsPage = () => {
   } = useForm<ISettingsData>({
     mode: "onBlur",
   });
-  const onSubmit: SubmitHandler<ISettingsData> = async ({
+  const onSubmit: SubmitHandler<ISettingsData> = ({
     name,
     email,
     passwordConfirm,
