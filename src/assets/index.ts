@@ -1,6 +1,7 @@
 import logoLight from "./img/logo-light.png";
 import logoDark from "./img/logo-dark.png";
 import bgAuth from "./img/background-auth.png";
+import fallback from "./img/fallback.png";
 import { ReactComponent as ArrowRightIcon } from "./icons/arrow-right.svg";
 import { ReactComponent as ArrowLeftIcon } from "./icons/arrow-left.svg";
 import { ReactComponent as ArrowDownIcon } from "./icons/arrow-down.svg";
@@ -19,6 +20,7 @@ export {
   logoLight,
   logoDark,
   bgAuth,
+  fallback,
   ArrowRightIcon,
   ArrowLeftIcon,
   BookMarkIcon,
