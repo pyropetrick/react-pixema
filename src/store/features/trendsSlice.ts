@@ -3,7 +3,7 @@ import { AxiosError } from "axios";
 import { moviesApi, transformMovies } from "services";
 import { IMovie, IResponseSearchAPI } from "types";
 interface ITrendsState {
-  trends: IMovie[];
+  trends: IMovie[] | null;
   isLoading: boolean;
   error: string | null;
 }
@@ -20,7 +20,7 @@ export const fetchTrends = createAsyncThunk<IResponseSearchAPI, null, { rejectVa
 );
 
 const initialState: ITrendsState = {
-  trends: [],
+  trends: null,
   isLoading: false,
   error: null,
 };

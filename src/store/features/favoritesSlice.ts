@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IMovie } from "types";
 
 interface IFavoritesState {
-  favorites: IMovie[];
+  favorites: IMovie[] | null;
 }
 
 const initialState: IFavoritesState = {
-  favorites: [],
+  favorites: null,
 };
 
 const favorites = createSlice({
@@ -14,10 +14,11 @@ const favorites = createSlice({
   initialState,
   reducers: {
     addFavorite: (state, { payload }: PayloadAction<IMovie>) => {
-      state.favorites.push(payload);
+      if (state.favorites) state.favorites.push(payload);
     },
     deleteFavorite: (state, { payload }: PayloadAction<string>) => {
-      state.favorites = state.favorites.filter((movie) => movie.imdbID !== payload);
+      if (state.favorites)
+        state.favorites = state.favorites.filter((movie) => movie.imdbID !== payload);
     },
   },
 });
