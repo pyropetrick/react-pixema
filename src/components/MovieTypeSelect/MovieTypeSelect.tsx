@@ -1,6 +1,5 @@
 import Select, { SingleValue } from "react-select";
 import { selectStyles } from "./styles";
-import { getFilter, selectMovieType, useAppDispatch, useAppSelector } from "store";
 
 export enum MovieType {
   MOVIES = "movie",
