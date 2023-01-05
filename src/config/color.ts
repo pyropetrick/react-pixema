@@ -15,4 +15,5 @@ export enum Color {
   PRIMARY_BG = "var(--primary-bg)",
   SECONDARY_BG = "var(--secondary-bg)",
   BLOCK_BG = "var(--block-bg)",
+  SELECT_BG = "var(--select-bg)",
 }
