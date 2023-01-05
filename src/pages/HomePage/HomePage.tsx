@@ -10,11 +10,11 @@ export const HomePage = () => {
     dispatch(fetchHomeMovies({ name: "batman", type: "movie" }));
   }, [dispatch]);
   return (
-    <>
-      <StyledHome>
-        <MovieList movies={movies} isLoading={isLoading} />
-      </StyledHome>
-      <Button text="Show more" type="button" variant="secondary" onClick={() => {}} />
-    </>
+    <StyledHome>
+      <MovieList movies={movies} isLoading={isLoading} />
+      {!isLoading && (
+        <Button text="Show more" type="button" variant="secondary" onClick={() => {}} />
+      )}
+    </StyledHome>
   );
 };
