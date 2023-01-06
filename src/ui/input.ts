@@ -28,6 +28,9 @@ export const Input = styled.input<{ $error?: boolean }>`
   ::-webkit-inner-spin-button {
     display: none;
   }
+  ::-webkit-search-cancel-button {
+    display: none;
+  }
 `;
 
 export const InputGroup = styled.div`
