@@ -18,9 +18,13 @@ import {
   collection,
   addDoc,
   getDocs,
+  query,
+  where,
+  deleteDoc,
 } from "firebase/firestore";
 import { ISignInData, ISignUpData } from "./types";
-import { IMovieInfo } from "types";
+import { IMovieInfo, ISettingsData } from "types";
+import { StoreError } from "services/helpers/getFirebaseErrorMessage";
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -57,13 +61,13 @@ export const userSignIn = async (userData: ISignInData) => {
   };
 };
 
-export const updateUserData = async (userData: ISignUpData) => {
-  const { email, password, name } = userData;
+export const updateUserData = async (userData: ISettingsData) => {
+  const { email, password, name, theme } = userData;
   if (auth.currentUser) {
     await updateProfile(auth.currentUser, { displayName: name });
     await updateEmail(auth.currentUser, email);
     await updatePassword(auth.currentUser, password);
-    await updateDoc(collectionUsers(auth.currentUser.uid), { name, email });
+    await updateDoc(collectionUsers(auth.currentUser.uid), { name, email, theme });
   }
 };
 
@@ -76,6 +80,12 @@ export const userLogOut = async () => {
 };
 
 export const addFavoriteToStore = async (movieInfo: IMovieInfo, userId: string) => {
+  const q = query(collectionFavorites(userId), where("imdbID", "==", movieInfo.imdbID));
+  const { docs } = await getDocs(q);
+  const movie = docs.map((doc) => doc.data());
+  if (movie.length) {
+    throw new StoreError("store/movie-already-favorite");
+  }
   await addDoc(collectionFavorites(userId), {
     ...movieInfo,
   });
@@ -85,4 +95,11 @@ export const getFavoritesFromStore = async (userId: string) => {
   const { docs } = await getDocs(collectionFavorites(userId));
   const favorites = docs.map((doc) => doc.data());
   return favorites as IMovieInfo[];
+};
+
+export const deleteFavoriteFromStore = async (movieId: string, userId: string) => {
+  const q = query(collectionFavorites(userId), where("imdbID", "==", movieId));
+  const { docs } = await getDocs(q);
+  const ref = docs.map((doc) => doc.ref);
+  await deleteDoc(ref[0]);
 };

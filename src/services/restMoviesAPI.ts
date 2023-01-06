@@ -27,6 +27,7 @@ class restMoviesAPI {
       page,
     };
     const { data } = await this.API.get<IResponseSearchAPI>("", { params });
+    if (data.Error) throw new Error(data.Error);
     return data;
   }
 }
