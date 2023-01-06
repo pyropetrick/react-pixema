@@ -3,12 +3,12 @@ import { IMovieInfo } from "types";
 import { RootState } from "store";
 import {
   addFavoriteToStore,
-  FirebaseError,
-  FirebaseErrorCode,
+  FirebaseErrorMessage,
   getFavoritesFromStore,
   getFirebaseErrorMessage,
 } from "services";
 import { toast } from "react-toastify";
+import { FirebaseError } from "firebase/app";
 
 interface IFavoritesState {
   favorites: IMovieInfo[] | null;
@@ -23,7 +23,7 @@ const initialState: IFavoritesState = {
 export const addFavorite = createAsyncThunk<
   void,
   IMovieInfo,
-  { rejectValue: FirebaseError; state: RootState }
+  { rejectValue: FirebaseErrorMessage; state: RootState }
 >("favorites/add", async (movieInfo, { rejectWithValue, getState }) => {
   try {
     const state = getState();
@@ -32,15 +32,15 @@ export const addFavorite = createAsyncThunk<
       await addFavoriteToStore(movieInfo, id);
     }
   } catch (error) {
-    const firebaseError = error as { errorCode: FirebaseErrorCode };
-    rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
+    const firebaseError = error as FirebaseError;
+    return rejectWithValue(getFirebaseErrorMessage(firebaseError));
   }
 });
 
 export const fetchFavorites = createAsyncThunk<
   IMovieInfo[] | undefined,
   void,
-  { rejectValue: FirebaseError; state: RootState }
+  { rejectValue: FirebaseErrorMessage; state: RootState }
 >("favorites/fetch", async (_, { rejectWithValue, getState }) => {
   try {
     const state = getState();
@@ -49,8 +49,8 @@ export const fetchFavorites = createAsyncThunk<
       return await getFavoritesFromStore(id);
     }
   } catch (error) {
-    const firebaseError = error as { errorCode: FirebaseErrorCode };
-    rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
+    const firebaseError = error as FirebaseError;
+    return rejectWithValue(getFirebaseErrorMessage(firebaseError));
   }
 });
 

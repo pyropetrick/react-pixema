@@ -1,9 +1,9 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { FirebaseError } from "firebase/app";
 import { User } from "firebase/auth";
 import { toast } from "react-toastify";
 import {
-  FirebaseError,
-  FirebaseErrorCode,
+  FirebaseErrorMessage,
   getFirebaseErrorMessage,
   IUserModel,
   resetUserPassword,
@@ -26,37 +26,37 @@ interface IUser {
 export const signUp = createAsyncThunk<
   IUserModel | undefined,
   ISignUpData,
-  { rejectValue: FirebaseError }
+  { rejectValue: FirebaseErrorMessage }
 >("user/signUp", async (userData, { rejectWithValue }) => {
   try {
     return await userSignUp(userData);
   } catch (error) {
-    const firebaseError = error as { errorCode: FirebaseErrorCode };
-    rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
+    const firebaseError = error as FirebaseError;
+    return rejectWithValue(getFirebaseErrorMessage(firebaseError));
   }
 });
 
 export const signIn = createAsyncThunk<
   IUserModel | undefined,
   ISignInData,
-  { rejectValue: FirebaseError }
+  { rejectValue: FirebaseErrorMessage }
 >("user/signIn", async (userData, { rejectWithValue }) => {
   try {
     return await userSignIn(userData);
   } catch (error) {
-    const firebaseError = error as { errorCode: FirebaseErrorCode };
-    rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
+    const firebaseError = error as FirebaseError;
+    return rejectWithValue(getFirebaseErrorMessage(firebaseError));
   }
 });
 
-export const userSignOut = createAsyncThunk<void, void, { rejectValue: FirebaseError }>(
+export const userSignOut = createAsyncThunk<void, void, { rejectValue: FirebaseErrorMessage }>(
   "user/signOut",
   async (_, { rejectWithValue }) => {
     try {
       await userLogOut();
     } catch (error) {
-      const firebaseError = error as { errorCode: FirebaseErrorCode };
-      rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
+      const firebaseError = error as FirebaseError;
+      return rejectWithValue(getFirebaseErrorMessage(firebaseError));
     }
   },
 );
@@ -64,27 +64,27 @@ export const userSignOut = createAsyncThunk<void, void, { rejectValue: FirebaseE
 export const resetPassword = createAsyncThunk<
   string | undefined,
   string,
-  { rejectValue: FirebaseError }
+  { rejectValue: FirebaseErrorMessage }
 >("user/resetPassword", async (email, { rejectWithValue }) => {
   try {
     await resetUserPassword(email);
     return email;
   } catch (error) {
-    const firebaseError = error as { errorCode: FirebaseErrorCode };
-    rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
+    const firebaseError = error as FirebaseError;
+    return rejectWithValue(getFirebaseErrorMessage(firebaseError));
   }
 });
 
 export const updateUserProfile = createAsyncThunk<
   void,
   ISignUpData,
-  { rejectValue: FirebaseError }
+  { rejectValue: FirebaseErrorMessage }
 >("user/updateProfile", async (userData, { rejectWithValue }) => {
   try {
     await updateUserData(userData);
   } catch (error) {
-    const firebaseError = error as { errorCode: FirebaseErrorCode };
-    rejectWithValue(getFirebaseErrorMessage(firebaseError.errorCode));
+    const firebaseError = error as FirebaseError;
+    return rejectWithValue(getFirebaseErrorMessage(firebaseError));
   }
 });
 

@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
+import { toast } from "react-toastify";
 import { moviesApi, transformMovies } from "services";
 import { IMovie, IRequestOption, IResponseSearchAPI } from "types";
 
@@ -12,7 +13,7 @@ export const fetchSearchMovies = createAsyncThunk<
     return await moviesApi.getSearchMovies(options);
   } catch (error) {
     const errorResponse = error as AxiosError;
-    rejectWithValue(errorResponse.message);
+    return rejectWithValue(errorResponse.message);
   }
 });
 
@@ -47,6 +48,7 @@ const searchMovies = createSlice({
       if (payload) {
         state.isLoading = false;
         state.error = payload;
+        toast.error(payload);
       }
     });
   },
