@@ -49,6 +49,7 @@ export const userSignUp = async (userData: ISignUpData) => {
 export const userSignIn = async (userData: ISignInData) => {
   const { email, password } = userData;
   const { user } = await signInWithEmailAndPassword(auth, email, password);
+
   return {
     name: user.displayName,
     email: user.email,
