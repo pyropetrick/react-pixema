@@ -46,12 +46,13 @@ export const LoginPage = () => {
             $error={errors.password && true}
             {...register("password", { required: true })}
           />
-          <RouterLink to={`/${ROUTE.RESET_PASSWORD}`}>Forgot Password?</RouterLink>
+          <RouterLink to={`${ROUTE.HOME + ROUTE.RESET_PASSWORD}`}>Forgot Password?</RouterLink>
         </Label>
       </InputGroup>
       <Button text="Sign in" variant="primary" type="submit" />
       <Text>
-        Don't have an account? <RouterLink to={`/${ROUTE.REGISTRATION}`}>Sign up</RouterLink>
+        Don't have an account?{" "}
+        <RouterLink to={`${ROUTE.HOME + ROUTE.REGISTRATION}`}>Sign up</RouterLink>
       </Text>
     </Form>
   );

@@ -35,7 +35,9 @@ export const SettingsPage = () => {
     passwordNew,
   }) => {
     if (passwordNew === passwordConfirm) {
-      dispatch(updateUserProfile({ name, email, password: passwordNew }));
+      dispatch(updateUserProfile({ name, email, password: passwordNew })).then((response) =>
+        reset(),
+      );
     }
   };
   const onReset = () => reset();

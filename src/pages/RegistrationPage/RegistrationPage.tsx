@@ -81,7 +81,7 @@ export const RegistrationPage = () => {
       </InputGroup>
       <Button text="Sign up" variant="primary" type="submit" />
       <Text>
-        Already have an account? <RouterLink to={`/${ROUTE.LOGIN}`}>Sign In</RouterLink>
+        Already have an account? <RouterLink to={`${ROUTE.HOME + ROUTE.LOGIN}`}>Sign In</RouterLink>
       </Text>
     </Form>
   );
