@@ -1,6 +1,5 @@
 import { Button, Label, RouterLink, Title } from "components";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
 import { ROUTE } from "router";
 import { signIn, useAppDispatch } from "store";
 import { Form, Input, InputGroup } from "ui";
@@ -12,7 +11,6 @@ interface ILoginData {
 }
 
 export const LoginPage = () => {
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const {
     handleSubmit,
@@ -21,10 +19,9 @@ export const LoginPage = () => {
     reset,
   } = useForm<ILoginData>({ mode: "onBlur" });
 
-  const onSubmit: SubmitHandler<ILoginData> = async (dataSignIn) => {
+  const onSubmit: SubmitHandler<ILoginData> = (dataSignIn) => {
     dispatch(signIn(dataSignIn));
     reset();
-    navigate(ROUTE.HOME);
   };
 
   return (
