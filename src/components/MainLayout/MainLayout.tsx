@@ -5,7 +5,7 @@ import { Content, StyledMainLayout } from "./styles";
 
 export const MainLayout = () => {
   const { isLoading } = useAppSelector(getUser);
-  if (isLoading) <LoadingBar />;
+  if (isLoading) return <LoadingBar />;
   return (
     <StyledMainLayout>
       <SideBar />

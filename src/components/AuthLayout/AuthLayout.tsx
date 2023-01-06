@@ -6,7 +6,7 @@ import { ROUTE } from "router";
 
 export const AuthLayout = () => {
   const { name, isLoading } = useAppSelector(getUser);
-  if (isLoading) <LoadingBar />;
+  if (isLoading) return <LoadingBar />;
   if (name) {
     return <Navigate to={ROUTE.HOME} />;
   }
