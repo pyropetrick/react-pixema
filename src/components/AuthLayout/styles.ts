@@ -1,25 +1,30 @@
+import { bgAuth } from "assets";
 import { Color } from "config";
 import styled from "styled-components";
 import { Media, typography } from "ui";
 
 export const StyledAuthLayout = styled.div`
+  min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 11fr 1fr;
+  grid-template-rows: 40px 1fr 24px;
   grid-row-gap: 40px;
-  height: 100%;
-  padding: 48px 62px 64px;
+  padding: 48px 62px 20px;
+  background: url(${bgAuth}) center no-repeat;
+  background-size: cover;
   ${Media.MD} {
-    padding: 47px 40px 56px;
-    grid-template-columns: 1fr;
+    padding: 47px 40px 20px;
   }
   ${Media.SM} {
     padding: 32px 24px 48px;
-    grid-template-rows: 1fr 6fr 1fr;
-    grid-row-gap: 20px;
+    grid-template-rows: 40px 1fr 24px;
+    grid-row-gap: 48px;
+    a {
+      justify-self: center;
+    }
   }
   a {
-    justify-self: left;
+    width: 150px;
   }
 `;
 
@@ -29,7 +34,6 @@ export const Image = styled.img`
   ${Media.SM} {
     width: 147px;
     height: 38px;
-    justify-self: center;
   }
 `;
 export const Copyright = styled.p`
@@ -41,6 +45,9 @@ export const Copyright = styled.p`
 export const Content = styled.div`
   justify-self: center;
   min-width: 574px;
+  ${Media.MD} {
+    min-width: 400px;
+  }
   ${Media.SM} {
     min-width: 274px;
   }
