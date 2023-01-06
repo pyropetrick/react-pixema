@@ -1,3 +1,5 @@
+export type Theme = "dark" | "light";
+
 export interface IRatingAPI {
   Source: string;
   Value: string;
@@ -55,6 +57,7 @@ export interface IResponseSearchAPI {
   Search: IMovieAPI[];
   totalResult: string;
   Response: string;
+  Error?: string;
 }
 
 export interface IRequestOption {
@@ -94,4 +97,11 @@ export interface ISignUpData {
 export interface ISignInData {
   email: string;
   password: string;
+}
+
+export interface ISettingsData {
+  email: string;
+  password: string;
+  name: string;
+  theme: Theme;
 }
