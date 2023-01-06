@@ -15,8 +15,12 @@ import { ReactComponent as SearchFilterIcon } from "./icons/search-filter.svg";
 import { ReactComponent as SettingsIcon } from "./icons/settings.svg";
 import { ReactComponent as ShareIcon } from "./icons/share.svg";
 import { ReactComponent as UserIcon } from "./icons/user.svg";
+import { ReactComponent as LogoutIcon } from "./icons/logout.svg";
+import { ReactComponent as SignInIcon } from "./icons/sign-in.svg";
 
 export {
+  SignInIcon,
+  LogoutIcon,
   logoLight,
   logoDark,
   bgAuth,
