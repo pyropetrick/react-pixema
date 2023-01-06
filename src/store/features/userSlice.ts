@@ -170,10 +170,15 @@ const user = createSlice({
         toast.error(payload);
       }
     });
+    builder.addCase(updateUserProfile.pending, (state, action) => {
+      state.isLoading = true;
+    });
     builder.addCase(updateUserProfile.fulfilled, (state, action) => {
+      state.isLoading = false;
       toast.success("Your Profile updated");
     });
     builder.addCase(updateUserProfile.rejected, (state, { payload }) => {
+      state.isLoading = false;
       if (payload) {
         toast.error(payload);
       }
