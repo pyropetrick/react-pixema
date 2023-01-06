@@ -5,7 +5,7 @@ import { StyledNavLink } from "./styles";
 interface IProps {
   title: string;
   to: string;
-  children: ReactNode;
+  children?: ReactNode;
 }
 
 export const MenuLink = ({ children, title, to }: IProps) => {

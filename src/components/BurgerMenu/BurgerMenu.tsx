@@ -20,7 +20,7 @@ export const BurgerMenu = () => {
                 <Title variant={"h3"} text={"Menu"} />
                 <CrossIcon onClick={handleCross} />
               </MenuHeader>
-              <MenuNav />
+              <MenuNav burger={true} />
             </Menu>
           </StyledBurgerMenu>
         </Portal>

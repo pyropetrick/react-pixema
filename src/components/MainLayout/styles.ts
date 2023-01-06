@@ -13,10 +13,8 @@ export const StyledMainLayout = styled.div`
     grid-template-columns: 1fr;
   }
   ${Media.SM} {
-    align-items: center;
     padding: 15px;
     margin: 0 auto;
-    /* padding: 32px 24px 48px; */
   }
 `;
 

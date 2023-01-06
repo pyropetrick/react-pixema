@@ -1,11 +1,17 @@
-import { BookMarkIcon, FireIcon, HomeIcon, SettingsIcon } from "assets";
+import { BookMarkIcon, FireIcon, HomeIcon, LogoutIcon, SettingsIcon, SignInIcon } from "assets";
 import { MenuLink } from "components";
 import { ROUTE } from "router";
-import { getUser, useAppSelector } from "store";
-import { StyledMenuNav } from "./styles";
+import { getUser, useAppDispatch, useAppSelector, userSignOut } from "store";
+import { LogoutWrapper, StyledMenuNav } from "./styles";
 
-export const MenuNav = () => {
+interface IProps {
+  burger?: boolean;
+}
+
+export const MenuNav = ({ burger }: IProps) => {
   const { isAuth } = useAppSelector(getUser);
+  const dispatch = useAppDispatch();
+  const handleLogout = () => dispatch(userSignOut());
   return (
     <StyledMenuNav>
       <MenuLink title="Home" to={ROUTE.HOME}>
@@ -22,7 +28,18 @@ export const MenuNav = () => {
           <MenuLink title="Settings" to={ROUTE.HOME + ROUTE.SETTINGS}>
             <SettingsIcon />
           </MenuLink>
+          {burger && (
+            <LogoutWrapper onClick={handleLogout}>
+              <LogoutIcon />
+              Logout
+            </LogoutWrapper>
+          )}
         </>
+      )}
+      {burger && !isAuth && (
+        <MenuLink title="Sign in" to={ROUTE.HOME + ROUTE.LOGIN}>
+          <SignInIcon />
+        </MenuLink>
       )}
     </StyledMenuNav>
   );
