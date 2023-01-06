@@ -14,7 +14,7 @@ export const TrendsPage = () => {
   return (
     <MainPageBlock>
       <MovieList movies={trends} isLoading={isLoading} />;
-      {!isLoading && (
+      {!isLoading && !!trends.length && (
         <Button text="Show more" type="button" variant="secondary" onClick={handleShowMore} />
       )}
     </MainPageBlock>

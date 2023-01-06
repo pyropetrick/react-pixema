@@ -14,7 +14,7 @@ export const HomePage = () => {
   return (
     <MainPageBlock>
       <MovieList movies={movies} isLoading={isLoading} />
-      {!isLoading && (
+      {!isLoading && !!movies.length && (
         <Button text="Show more" type="button" variant="secondary" onClick={handleShowMore} />
       )}
     </MainPageBlock>

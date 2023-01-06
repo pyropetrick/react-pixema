@@ -8,7 +8,6 @@ import { updateUserProfile } from "../../store/features/userSlice";
 interface ISettingsData {
   name: string;
   email: string;
-  password: string;
   passwordConfirm: string;
   passwordNew: string;
 }
@@ -35,7 +34,7 @@ export const SettingsPage = () => {
     passwordNew,
   }) => {
     if (passwordNew === passwordConfirm) {
-      dispatch(updateUserProfile({ name, email, password: passwordNew })).then((response) =>
+      dispatch(updateUserProfile({ name, email, password: passwordNew, theme })).then((response) =>
         reset(),
       );
     }
@@ -49,7 +48,7 @@ export const SettingsPage = () => {
           <Input
             placeholder="Your name"
             type="text"
-            {...register("name", { required: true, pattern: /[A-Za-z]*?s[A-Za-z]/ })}
+            {...register("name", { required: true, pattern: /^[A-Z][a-z]+ [A-Z][a-z]+$/ })}
           />
         </Label>
         <Label text="Email">
@@ -58,14 +57,14 @@ export const SettingsPage = () => {
       </FormCard>
       <Title variant="h2" text="Password" />
       <FormCard>
-        <Label text="Password">
+        {/* <Label text="Password">
           <Input
             placeholder="Your password"
             type="password"
             $error={errors.password && true}
             {...register("password", { required: true })}
           />
-        </Label>
+        </Label> */}
         <Label text="New Password">
           <Input
             placeholder="New password"

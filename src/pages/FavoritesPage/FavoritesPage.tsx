@@ -10,11 +10,11 @@ export const FavoritesPage = () => {
     dispatch(fetchFavorites());
   }, [dispatch]);
   if (isLoading) return <LoadingBar />;
-  if (!favorites) {
+  if (!favorites.length) {
     return (
       <Fallback>
         <Image />
-        <Title variant={"h3"} text={"Empty state text"} />
+        <Title variant={"h3"} text={"Favorites is empty"} />
       </Fallback>
     );
   }

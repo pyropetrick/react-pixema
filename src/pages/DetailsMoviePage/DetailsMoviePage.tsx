@@ -1,5 +1,12 @@
 import { useParams } from "react-router";
-import { useAppSelector, useAppDispatch, getMovie, getMovieById, addFavorite } from "store";
+import {
+  useAppSelector,
+  useAppDispatch,
+  getMovie,
+  getMovieById,
+  addFavorite,
+  getUser,
+} from "store";
 import { useEffect } from "react";
 import {
   Details,
@@ -16,12 +23,12 @@ import {
 } from "./styles";
 import { LoadingBar, Title } from "components";
 import { BookMarkIcon, IMDBIcon } from "assets";
-import { toast } from "react-toastify";
 
 export const DetailsMoviePage = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams();
   const { movie, isLoading } = useAppSelector(getMovie);
+  const { isAuth } = useAppSelector(getUser);
   useEffect(() => {
     id && dispatch(getMovieById(id));
   }, [dispatch, id]);
@@ -37,14 +44,13 @@ export const DetailsMoviePage = () => {
   ];
   const handleFavorite = () => {
     dispatch(addFavorite(movie));
-    toast.success(`${movie.title} add to favorites`);
   };
   if (isLoading) return <LoadingBar />;
   return (
     <StyledDetailsMoviePage>
       <PosterWrapper>
         <Poster src={movie.poster} alt={`poster ${movie.title}`} />
-        <FavoriteButton onClick={handleFavorite}>
+        <FavoriteButton onClick={handleFavorite} disabled={!isAuth}>
           <BookMarkIcon />
         </FavoriteButton>
       </PosterWrapper>
