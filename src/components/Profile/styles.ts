@@ -1,18 +1,19 @@
 import { Color } from "config";
 import styled from "styled-components";
-import { Media, typography } from "ui";
+import { typography } from "ui";
 
 export const StyledProfile = styled.div`
   position: relative;
-  display: flex;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: 56px 150px;
+  grid-column-gap: 30px;
   align-items: center;
-  ${Media.MD} {
-    display: none;
-  }
 `;
 
 export const Name = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
   background-color: transparent;
   ${typography.s3};
   &:hover {
@@ -51,4 +52,10 @@ export const DropDownItem = styled.div`
     cursor: pointer;
     color: ${Color.PRIMARY};
   }
+`;
+
+export const InnerSignIn = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;

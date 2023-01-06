@@ -7,13 +7,12 @@ export const StyledMovieList = styled.ul`
   display: flex;
   flex-wrap: wrap;
   gap: 40px;
-  max-height: 600px;
-  overflow-y: auto;
-  &::-webkit-scrollbar {
-    display: none;
-  }
-  ${Media.MD} {
+  ${Media.LG} {
     gap: 32px;
+  }
+  ${Media.SM} {
+    gap: 32px 0;
+    justify-content: center;
   }
 `;
 
@@ -34,7 +33,7 @@ export const Image = styled.div`
   height: 400px;
   background: url(${fallback}) center no-repeat;
   background-size: contain;
-  ${Media.MD} {
+  ${Media.LG} {
     width: 336px;
     height: 298px;
   }

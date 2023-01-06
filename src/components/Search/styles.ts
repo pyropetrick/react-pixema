@@ -6,6 +6,7 @@ export const StyledSearch = styled.div`
   display: flex;
   align-items: center;
   position: relative;
+  grid-area: search;
 `;
 
 export const SearchInput = styled(Input)`

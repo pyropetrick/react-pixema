@@ -13,6 +13,8 @@ export const StyledFilterMenu = styled.div`
   grid-template-columns: 6fr 3fr;
   ${Media.MD} {
     grid-template-columns: 1fr 4fr;
+    width: 100%;
+    height: 100%;
   }
   ${Media.SM} {
     grid-template-columns: 0 1fr;

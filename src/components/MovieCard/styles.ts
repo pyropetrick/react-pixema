@@ -6,9 +6,12 @@ export const StyledMovieCard = styled.li`
   position: relative;
   max-width: 266px;
   max-height: 433px;
-  ${Media.MD} {
-    max-width: 208px;
+  ${Media.LG} {
+    max-width: 200px;
     max-height: 379px;
+  }
+  ${Media.MD} {
+    max-width: 180px;
   }
   ${Media.SM} {
     max-width: 272px;
@@ -21,9 +24,12 @@ export const Poster = styled.img`
   height: 357px;
   border-radius: 20px;
   margin-bottom: 8px;
-  ${Media.MD} {
-    width: 208px;
+  ${Media.LG} {
+    width: 200px;
     height: 279px;
+  }
+  ${Media.MD} {
+    width: 180px;
   }
   ${Media.SM} {
     margin-bottom: 20px;
@@ -35,13 +41,16 @@ export const Title = styled.h6`
   ${typography.s2};
 `;
 
-export const Genres = styled.div`
+export const Genres = styled.p`
   color: ${Color.LIGHT};
-  display: flex;
-  gap: 13px;
-  ${typography.s3};
+  /* display: flex;
+  flex-wrap: wrap;
+  gap: 2px 13px; */
+  ${typography.s3}
   font-weight: 500;
-  p {
+
+  span {
+    margin-right: 13px;
     position: relative;
     &:after {
       content: "\u2022";
@@ -51,6 +60,7 @@ export const Genres = styled.div`
       top: 0;
     }
     &:last-child:after {
+      margin-right: 0;
       display: none;
     }
   }
