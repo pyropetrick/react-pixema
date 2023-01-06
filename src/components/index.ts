@@ -12,6 +12,7 @@ export * from "./Button/Button";
 export * from "./MenuLink/MenuLink";
 export * from "./MovieTypeSelect/MovieTypeSelect";
 export * from "./MenuNav/MenuNav";
+export * from "./BurgerMenu/BurgerMenu";
 export * from "./MovieCard/MovieCard";
 export * from "./MovieList/MovieList";
 export * from "./Profile/Profile";

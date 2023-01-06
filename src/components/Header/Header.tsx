@@ -1,12 +1,14 @@
-import { FilterMenu, Profile, Search } from "components";
+import { BurgerMenu, FilterMenu, Logo, Profile, Search } from "components";
 import { useDebounce, useInput, useToogle } from "hooks";
 import { StyledHeader } from "./styles";
 import { useAppSelector, getUser } from "store";
 import { useEffect } from "react";
 import { generatePath, useNavigate } from "react-router";
 import { ROUTE } from "router";
+import { useWindowSize } from "hooks";
 
 export const Header = () => {
+  const { width } = useWindowSize();
   const search = useInput();
   const navigate = useNavigate();
   const debounceValue = useDebounce(search.value, 1000);
@@ -15,11 +17,16 @@ export const Header = () => {
     debounceValue && navigate(generatePath(ROUTE.SEARCH, { name: debounceValue }));
     //eslint-disable-next-line
   }, [debounceValue]);
-  const { isAuth, name } = useAppSelector(getUser);
+  const { isAuth, name, email } = useAppSelector(getUser);
   return (
     <StyledHeader>
+      {width && width <= 1280 && <Logo />}
       <Search {...search} onClick={toogleFilter} />
-      <Profile name={name || ""} isAuth={isAuth} />
+      {width && width >= 1281 ? (
+        <Profile name={name || ""} email={email || ""} isAuth={isAuth} />
+      ) : (
+        <BurgerMenu />
+      )}
       {isActive && <FilterMenu toogleFilter={toogleFilter} />}
     </StyledHeader>
   );
