@@ -1,16 +1,17 @@
-import { ArrowDownIcon, UserIcon } from "assets";
+import { ArrowDownIcon, ArrowRightIcon, UserIcon } from "assets";
 import { RouterLink } from "components";
 import { useToogle } from "hooks";
 import { ROUTE } from "router";
 import { useAppDispatch, userSignOut } from "store";
-import { DropDown, DropDownItem, Name, ProfileIcon, StyledProfile } from "./styles";
+import { DropDown, DropDownItem, InnerSignIn, Name, ProfileIcon, StyledProfile } from "./styles";
 
 interface IProps {
   name: string;
   isAuth: boolean;
+  email: string;
 }
 
-export const Profile = ({ name, isAuth }: IProps) => {
+export const Profile = ({ name, email, isAuth }: IProps) => {
   const dispatch = useAppDispatch();
   const [dropDownIsActive, toogleDropDown] = useToogle();
   const profileNameWords = name.split(" ");
@@ -21,13 +22,17 @@ export const Profile = ({ name, isAuth }: IProps) => {
   };
   return (
     <StyledProfile>
-      <ProfileIcon>{isAuth ? `${name[0]}${profileNameWords[1][0]}` : <UserIcon />}</ProfileIcon>
+      <ProfileIcon>{name ? `${name[0]}${profileNameWords[1][0]}` : <UserIcon />}</ProfileIcon>
       {isAuth ? (
         <Name onClick={handleName}>
-          {name} <ArrowDownIcon />
+          {name || email} <ArrowDownIcon />
         </Name>
       ) : (
-        <RouterLink to={ROUTE.LOGIN}>Sign in</RouterLink>
+        <RouterLink to={ROUTE.HOME + ROUTE.LOGIN}>
+          <InnerSignIn>
+            Sign in <ArrowRightIcon />
+          </InnerSignIn>
+        </RouterLink>
       )}
       {dropDownIsActive && (
         <DropDown>

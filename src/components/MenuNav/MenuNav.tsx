@@ -11,15 +11,15 @@ export const MenuNav = () => {
       <MenuLink title="Home" to={ROUTE.HOME}>
         <HomeIcon />
       </MenuLink>
-      <MenuLink title="Trends" to={ROUTE.TRENDS}>
+      <MenuLink title="Trends" to={ROUTE.HOME + ROUTE.TRENDS}>
         <FireIcon />
       </MenuLink>
       {isAuth && (
         <>
-          <MenuLink title="Favorites" to={ROUTE.FAVORITES}>
+          <MenuLink title="Favorites" to={ROUTE.HOME + ROUTE.FAVORITES}>
             <BookMarkIcon />
           </MenuLink>
-          <MenuLink title="Settings" to={ROUTE.SETTINGS}>
+          <MenuLink title="Settings" to={ROUTE.HOME + ROUTE.SETTINGS}>
             <SettingsIcon />
           </MenuLink>
         </>

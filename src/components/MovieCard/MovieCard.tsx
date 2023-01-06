@@ -3,7 +3,7 @@ import { generatePath } from "react-router-dom";
 import { StyledMovieCard, Poster, Title, Genres, Rate, FavoriteButton } from "./styles";
 import { RouterLink } from "components";
 import { BookMarkIcon } from "assets";
-import { toast } from "react-toastify";
+import { deleteFavorite, useAppDispatch } from "store";
 
 interface IProps {
   id: string;
@@ -14,8 +14,9 @@ interface IProps {
   favorite?: boolean;
 }
 export const MovieCard = ({ id, title, img, genres, rating, favorite }: IProps) => {
+  const dispatch = useAppDispatch();
   const handleFavorite = () => {
-    toast.success(`Delete ${title} from Favorites`);
+    dispatch(deleteFavorite(id));
   };
   return (
     <StyledMovieCard>
@@ -25,7 +26,7 @@ export const MovieCard = ({ id, title, img, genres, rating, favorite }: IProps) 
           <BookMarkIcon />
         </FavoriteButton>
       )}
-      <RouterLink to={generatePath(`/${ROUTE.MOVIE}`, { id })}>
+      <RouterLink to={generatePath(`${ROUTE.HOME + ROUTE.MOVIE}`, { id })}>
         {img === "N/A" ? (
           <Poster src={`https://via.placeholder.com/250.png?text=${title}`} alt="fallback image" />
         ) : (
@@ -35,7 +36,7 @@ export const MovieCard = ({ id, title, img, genres, rating, favorite }: IProps) 
         {genres && (
           <Genres>
             {genres.map((genre) => (
-              <p key={genre}>{genre}</p>
+              <span key={genre}>{genre}</span>
             ))}
           </Genres>
         )}

@@ -3,16 +3,16 @@ import { IMovie } from "types";
 import { Fallback, StyledMovieList, Image } from "./styles";
 
 interface IProps {
-  movies: IMovie[] | null;
+  movies: IMovie[];
   isLoading: boolean;
 }
 export const MovieList = ({ movies, isLoading }: IProps) => {
   if (isLoading) return <LoadingBar />;
-  if (!movies) {
+  if (movies.length === 0) {
     return (
       <Fallback>
         <Image />
-        <Title variant={"h3"} text={"Empty state text"} />
+        <Title variant={"h3"} text={"Movies not found"} />
       </Fallback>
     );
   }
