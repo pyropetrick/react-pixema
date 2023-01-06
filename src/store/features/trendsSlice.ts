@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import { moviesApi, transformMovies } from "services";
 import { IMovie, IResponseSearchAPI } from "types";
 interface ITrendsState {
-  trends: IMovie[] | null;
+  trends: IMovie[];
   isLoading: boolean;
   error: string | null;
 }
@@ -21,7 +21,7 @@ export const fetchTrends = createAsyncThunk<IResponseSearchAPI, number, { reject
 );
 
 const initialState: ITrendsState = {
-  trends: null,
+  trends: [],
   isLoading: false,
   error: null,
 };

@@ -18,13 +18,13 @@ export const fetchHomeMovies = createAsyncThunk<
 });
 
 interface IMoviesState {
-  movies: IMovie[] | null;
+  movies: IMovie[];
   isLoading: boolean;
   error: string | null;
 }
 
 const initialState: IMoviesState = {
-  movies: null,
+  movies: [],
   isLoading: false,
   error: null,
 };

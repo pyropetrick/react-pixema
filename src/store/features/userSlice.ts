@@ -12,7 +12,7 @@ import {
   userSignIn,
   userSignUp,
 } from "services";
-import { ISignInData, ISignUpData } from "types";
+import { ISettingsData, ISignInData, ISignUpData } from "types";
 
 interface IUser {
   name: string | null;
@@ -77,7 +77,7 @@ export const resetPassword = createAsyncThunk<
 
 export const updateUserProfile = createAsyncThunk<
   void,
-  ISignUpData,
+  ISettingsData,
   { rejectValue: FirebaseErrorMessage }
 >("user/updateProfile", async (userData, { rejectWithValue }) => {
   try {
