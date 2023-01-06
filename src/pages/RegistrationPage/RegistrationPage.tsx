@@ -1,5 +1,6 @@
 import { Button, Label, RouterLink, Title } from "components";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { ROUTE } from "router";
 import { signUp, useAppDispatch } from "store";
 import { Form, Input, InputGroup } from "ui";
@@ -30,6 +31,8 @@ export const RegistrationPage = () => {
       dispatch(signUp({ name, email, password })).then((response) => {
         reset();
       });
+    } else {
+      toast.warning("Passwords do not match");
     }
   };
 

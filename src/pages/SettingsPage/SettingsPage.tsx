@@ -5,6 +5,7 @@ import { getTheme, toggleTheme, useAppDispatch, useAppSelector } from "store";
 import { Input } from "ui";
 import { GroupButton, FormCard, DescSpan, FormSettings } from "./styles";
 import { updateUserProfile } from "../../store/features/userSlice";
+import { toast } from "react-toastify";
 interface ISettingsData {
   name: string;
   email: string;
@@ -37,6 +38,8 @@ export const SettingsPage = () => {
       dispatch(updateUserProfile({ name, email, password: passwordNew, theme })).then((response) =>
         reset(),
       );
+    } else {
+      toast.warning("Passwords do not match");
     }
   };
   const onReset = () => reset();
@@ -57,14 +60,6 @@ export const SettingsPage = () => {
       </FormCard>
       <Title variant="h2" text="Password" />
       <FormCard>
-        {/* <Label text="Password">
-          <Input
-            placeholder="Your password"
-            type="password"
-            $error={errors.password && true}
-            {...register("password", { required: true })}
-          />
-        </Label> */}
         <Label text="New Password">
           <Input
             placeholder="New password"
