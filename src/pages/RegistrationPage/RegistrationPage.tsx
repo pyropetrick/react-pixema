@@ -42,7 +42,7 @@ export const RegistrationPage = () => {
             placeholder="Your name"
             type="text"
             $error={errors.name && true}
-            {...register("name", { required: true, pattern: /[A-Za-z]*?s[A-Za-z]/ })}
+            {...register("name", { required: true, pattern: /^[A-Z][a-z]+ [A-Z][a-z]+$/ })}
           />
         </Label>
         <Label text="Email">
