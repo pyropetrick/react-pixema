@@ -4,7 +4,7 @@ import { fetchHomeMovies, getMovies, useAppDispatch, useAppSelector } from "stor
 import { MainPageBlock } from "ui";
 
 export const HomePage = () => {
-  const { movies, isLoading } = useAppSelector(getMovies);
+  const { movies, isLoading, error } = useAppSelector(getMovies);
   const dispatch = useAppDispatch();
   const [page, setPage] = useState<number>(1);
   const handleShowMore = () => setPage((prevPage) => ++prevPage);
@@ -13,7 +13,7 @@ export const HomePage = () => {
   }, [dispatch, page]);
   return (
     <MainPageBlock>
-      <MovieList movies={movies} isLoading={isLoading} />
+      <MovieList movies={movies} isLoading={isLoading} error={error} />
       {!isLoading && !!movies.length && (
         <Button text="Show more" type="button" variant="secondary" onClick={handleShowMore} />
       )}

@@ -53,7 +53,14 @@ export const DetailsMoviePage = () => {
       transition={{ ease: "easeIn", duration: 0.5 }}
     >
       <PosterWrapper>
-        <Poster src={movie.poster} alt={`poster ${movie.title}`} />
+        {movie.poster === "N/A" ? (
+          <Poster
+            src={`https://via.placeholder.com/250.png?text=${movie.title}`}
+            alt="fallback image"
+          />
+        ) : (
+          <Poster src={movie.poster} alt={`poster ${movie.title}`} />
+        )}
         <FavoriteButton onClick={handleFavorite} disabled={!isAuth}>
           <BookMarkIcon />
         </FavoriteButton>

@@ -18,10 +18,10 @@ export const SearchPage = () => {
       dispatch(fetchSearchMovies({ name, year, type, page }));
     } else name && dispatch(fetchSearchMovies({ name, page }));
   }, [dispatch, name, page, year, type]);
-  const { movies, isLoading } = useAppSelector(getSearchMovies);
+  const { movies, isLoading, error } = useAppSelector(getSearchMovies);
   return (
     <MainPageBlock>
-      <MovieList movies={movies} isLoading={isLoading} />
+      <MovieList movies={movies} isLoading={isLoading} error={error} />
       {!isLoading && !!movies.length && (
         <Button text="Show more" type="button" variant="secondary" onClick={handleShowMore} />
       )}
