@@ -4,7 +4,6 @@ import { Color } from "../config";
 
 export const GlobalStyles = createGlobalStyle`
 ${resetCSS};
-@import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700&display=swap');
 body {
   color: ${Color.PRIMARY_TEXT};
   background-color: ${Color.PRIMARY_BG};
