@@ -36,6 +36,7 @@ const searchMovies = createSlice({
   extraReducers(builder) {
     builder.addCase(fetchSearchMovies.pending, (state, action) => {
       state.isLoading = true;
+      state.error = null;
     });
     builder.addCase(fetchSearchMovies.fulfilled, (state, { payload }) => {
       if (payload) {

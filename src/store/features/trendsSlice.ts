@@ -33,6 +33,7 @@ const trends = createSlice({
   extraReducers(builder) {
     builder.addCase(fetchTrends.pending, (state) => {
       state.isLoading = true;
+      state.error = null;
     });
     builder.addCase(fetchTrends.fulfilled, (state, { payload }) => {
       state.isLoading = false;
