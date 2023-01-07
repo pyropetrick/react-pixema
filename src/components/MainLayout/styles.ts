@@ -1,7 +1,8 @@
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { Media } from "ui";
 
-export const StyledMainLayout = styled.div`
+export const StyledMainLayout = styled(motion.div)`
   min-height: 100vh;
   padding: 40px;
   display: grid;

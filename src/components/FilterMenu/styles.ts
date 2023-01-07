@@ -1,4 +1,5 @@
 import { Color } from "config";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { Media } from "ui";
 
@@ -21,12 +22,12 @@ export const StyledFilterMenu = styled.div`
   }
 `;
 
-export const Background = styled.div`
+export const Background = styled(motion.div)`
   background-color: ${Color.DARK};
   opacity: 0.5;
 `;
 
-export const Filters = styled.form`
+export const Filters = styled(motion.form)`
   display: grid;
   grid-template-rows: 50px 1fr 60px;
   grid-gap: 40px;

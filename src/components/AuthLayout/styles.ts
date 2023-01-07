@@ -1,9 +1,10 @@
 import { bgAuth } from "assets";
 import { Color } from "config";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { Media, typography } from "ui";
 
-export const StyledAuthLayout = styled.div`
+export const StyledAuthLayout = styled(motion.div)`
   min-height: 100vh;
   display: grid;
   grid-template-columns: 1fr;

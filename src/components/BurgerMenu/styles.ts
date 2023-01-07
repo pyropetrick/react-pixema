@@ -1,4 +1,5 @@
 import { Color } from "config";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { Media } from "ui";
 
@@ -9,7 +10,7 @@ export const Burger = styled.div`
   grid-area: burger;
 `;
 
-export const Background = styled.div`
+export const Background = styled(motion.div)`
   background-color: ${Color.DARK};
   opacity: 0.5;
 `;
@@ -33,7 +34,7 @@ export const StyledBurgerMenu = styled.div`
   }
 `;
 
-export const Menu = styled.div`
+export const Menu = styled(motion.div)`
   display: flex;
   flex-direction: column;
   gap: 40px;

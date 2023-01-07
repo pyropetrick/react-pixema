@@ -17,7 +17,11 @@ export const MovieList = ({ movies, isLoading }: IProps) => {
     );
   }
   return (
-    <StyledMovieList>
+    <StyledMovieList
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ ease: "easeIn", duration: 0.5 }}
+    >
       {movies &&
         movies.map(({ imdbID, title, poster }) => (
           <MovieCard key={imdbID} title={title} img={poster} id={imdbID} />

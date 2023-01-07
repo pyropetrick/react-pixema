@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { generatePath, useNavigate } from "react-router";
 import { ROUTE } from "router";
 import { useWindowSize } from "hooks";
+import { AnimatePresence } from "framer-motion";
 
 export const Header = () => {
   const { width } = useWindowSize();
@@ -27,7 +28,7 @@ export const Header = () => {
       ) : (
         <BurgerMenu />
       )}
-      {isActive && <FilterMenu toogleFilter={toogleFilter} />}
+      <AnimatePresence>{isActive && <FilterMenu toogleFilter={toogleFilter} />}</AnimatePresence>
     </StyledHeader>
   );
 };

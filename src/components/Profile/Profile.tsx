@@ -1,5 +1,6 @@
 import { ArrowDownIcon, ArrowRightIcon, UserIcon } from "assets";
 import { RouterLink } from "components";
+import { AnimatePresence, Variants } from "framer-motion";
 import { useToogle } from "hooks";
 import { ROUTE } from "router";
 import { useAppDispatch, userSignOut } from "store";
@@ -34,14 +35,25 @@ export const Profile = ({ name, email, isAuth }: IProps) => {
           </InnerSignIn>
         </RouterLink>
       )}
-      {dropDownIsActive && (
-        <DropDown>
-          <DropDownItem>
-            <RouterLink to={ROUTE.SETTINGS}>Edit Profile</RouterLink>
-          </DropDownItem>
-          <DropDownItem onClick={handleLogout}>Log Out</DropDownItem>
-        </DropDown>
-      )}
+      <AnimatePresence>
+        {dropDownIsActive && (
+          <DropDown
+            initial="collapsed"
+            animate="open"
+            exit="collapsed"
+            variants={{
+              open: { opacity: 1, height: "auto" },
+              collapsed: { opacity: 0, height: 0 },
+            }}
+            transition={{ duration: 0.8, ease: [0.04, 0.62, 0.23, 0.98] }}
+          >
+            <DropDownItem>
+              <RouterLink to={ROUTE.SETTINGS}>Edit Profile</RouterLink>
+            </DropDownItem>
+            <DropDownItem onClick={handleLogout}>Log Out</DropDownItem>
+          </DropDown>
+        )}
+      </AnimatePresence>
     </StyledProfile>
   );
 };

@@ -60,8 +60,20 @@ export const FilterMenu = ({ toogleFilter }: IProps) => {
   return (
     <Portal target={TargetPortal.MODAL}>
       <StyledFilterMenu>
-        <Background onClick={toogleFilter} />
-        <Filters onSubmit={handleSubmit(onSubmit)}>
+        <Background
+          onClick={toogleFilter}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 0.5 }}
+          exit={{ opacity: 0 }}
+          transition={{ ease: "easeInOut" }}
+        />
+        <Filters
+          onSubmit={handleSubmit(onSubmit)}
+          initial={{ x: 1000, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ ease: "easeInOut" }}
+          exit={{ x: 1000, opacity: 0 }}
+        >
           <FilterHeader>
             <Title variant={"h2"} text={"Filters"} />
             <CrossIcon onClick={handleCross} />

@@ -1,4 +1,5 @@
 import { Color } from "config";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { typography } from "ui";
 
@@ -27,7 +28,7 @@ export const ProfileIcon = styled.div`
   background-color: ${Color.PRIMARY};
 `;
 
-export const DropDown = styled.div`
+export const DropDown = styled(motion.div)`
   position: absolute;
   top: 110%;
   left: 0;
