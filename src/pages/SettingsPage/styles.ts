@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { Color } from "config";
 import { Media, typography } from "ui";
+import { motion } from "framer-motion";
 
-export const FormSettings = styled.form`
+export const FormSettings = styled(motion.form)`
   display: grid;
   grid-template-columns: 1fr;
   max-width: 1186px;

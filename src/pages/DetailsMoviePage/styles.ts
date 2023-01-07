@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { Color } from "config";
 import { typography } from "ui";
+import { motion } from "framer-motion";
 
-export const StyledDetailsMoviePage = styled.div`
+export const StyledDetailsMoviePage = styled(motion.div)`
   display: grid;
   grid-template-columns: 1fr 3.5fr 1fr;
   grid-column-gap: 42px;

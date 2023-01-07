@@ -19,7 +19,11 @@ export const FavoritesPage = () => {
     );
   }
   return (
-    <FavoriteList>
+    <FavoriteList
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ ease: "easeIn", duration: 0.5 }}
+    >
       {favorites &&
         favorites.map(({ imdbID, title, poster, genres, imdbRating }) => (
           <MovieCard

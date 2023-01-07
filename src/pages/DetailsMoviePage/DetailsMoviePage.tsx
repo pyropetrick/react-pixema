@@ -47,7 +47,11 @@ export const DetailsMoviePage = () => {
   };
   if (isLoading) return <LoadingBar />;
   return (
-    <StyledDetailsMoviePage>
+    <StyledDetailsMoviePage
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ ease: "easeIn", duration: 0.5 }}
+    >
       <PosterWrapper>
         <Poster src={movie.poster} alt={`poster ${movie.title}`} />
         <FavoriteButton onClick={handleFavorite} disabled={!isAuth}>

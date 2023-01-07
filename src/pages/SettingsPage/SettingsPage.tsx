@@ -44,7 +44,12 @@ export const SettingsPage = () => {
   };
   const onReset = () => reset();
   return (
-    <FormSettings onSubmit={handleSubmit(onSubmit)}>
+    <FormSettings
+      onSubmit={handleSubmit(onSubmit)}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ ease: "easeInOut", duration: 0.5 }}
+    >
       <Title variant="h2" text="Profile" />
       <FormCard>
         <Label text="Name">

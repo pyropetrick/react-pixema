@@ -17,7 +17,13 @@ export const PasswordResetPage = () => {
   const onSubmit: SubmitHandler<IResetPasswordForm> = ({ email }) => dispatch(resetPassword(email));
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form
+      onSubmit={handleSubmit(onSubmit)}
+      animate={{ scale: 1 }}
+      initial={{ scale: 0 }}
+      exit={{ scale: 0 }}
+      transition={{ ease: "easeInOut", duration: 0.4 }}
+    >
       <Title variant="h2" text="Reset Password" />
       <Label text="Email">
         <Input

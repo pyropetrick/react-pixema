@@ -25,7 +25,13 @@ export const LoginPage = () => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form
+      onSubmit={handleSubmit(onSubmit)}
+      animate={{ scale: 1 }}
+      initial={{ scale: 0 }}
+      exit={{ scale: 0 }}
+      transition={{ ease: "easeInOut", duration: 0.4 }}
+    >
       <Title variant="h2" text="Sign In" />
       <InputGroup>
         <Label text="Email">
