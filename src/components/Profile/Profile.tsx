@@ -1,6 +1,6 @@
 import { ArrowDownIcon, ArrowRightIcon, UserIcon } from "assets";
 import { RouterLink } from "components";
-import { AnimatePresence, Variants } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 import { useToogle } from "hooks";
 import { ROUTE } from "router";
 import { useAppDispatch, userSignOut } from "store";
