@@ -1,8 +1,9 @@
 import { Color } from "config";
+import { motion } from "framer-motion";
 import styled from "styled-components";
 import { Media } from "ui";
 
-export const Form = styled.form`
+export const Form = styled(motion.form)`
   background-color: ${Color.BLOCK_BG};
   display: flex;
   flex-direction: column;
