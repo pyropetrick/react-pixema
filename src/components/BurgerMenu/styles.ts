@@ -38,7 +38,7 @@ export const Menu = styled(motion.div)`
   display: flex;
   flex-direction: column;
   gap: 40px;
-  background-color: ${Color.DARK};
+  background-color: ${Color.BLOCK_BG};
   padding: 48px 40px;
 `;
 

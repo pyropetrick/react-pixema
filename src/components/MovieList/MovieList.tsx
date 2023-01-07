@@ -5,10 +5,11 @@ import { Fallback, StyledMovieList, Image } from "./styles";
 interface IProps {
   movies: IMovie[];
   isLoading: boolean;
+  error?: string | null;
 }
-export const MovieList = ({ movies, isLoading }: IProps) => {
+export const MovieList = ({ movies, isLoading, error }: IProps) => {
   if (isLoading) return <LoadingBar />;
-  if (movies.length === 0) {
+  if (movies.length === 0 || error) {
     return (
       <Fallback>
         <Image />

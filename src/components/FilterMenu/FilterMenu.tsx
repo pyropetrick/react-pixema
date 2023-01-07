@@ -38,7 +38,7 @@ export const FilterMenu = ({ toogleFilter }: IProps) => {
     reset,
     control,
     formState: { errors },
-  } = useForm<IFilterForm>({ mode: "onBlur" });
+  } = useForm<IFilterForm>({ mode: "onBlur", defaultValues: { movieType: options[0] } });
 
   const navigate = useNavigate();
 
