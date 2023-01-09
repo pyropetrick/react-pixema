@@ -63,8 +63,8 @@ export interface IResponseSearchAPI {
 
 export interface IRequestOption {
   name: string;
-  type?: string;
-  year?: string;
+  type?: string | null;
+  year?: string | null;
   page?: number;
 }
 
