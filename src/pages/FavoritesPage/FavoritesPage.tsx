@@ -1,7 +1,7 @@
-import { LoadingBar, MovieCard, Title } from "components";
+import { Fallback, LoadingBar, MovieCard } from "components";
 import { useEffect } from "react";
 import { fetchFavorites, getFavorites, useAppDispatch, useAppSelector } from "store";
-import { Fallback, FavoriteList, Image } from "./styles";
+import { FavoriteList } from "./styles";
 
 export const FavoritesPage = () => {
   const { favorites, isLoading } = useAppSelector(getFavorites);
@@ -11,12 +11,7 @@ export const FavoritesPage = () => {
   }, [dispatch]);
   if (isLoading) return <LoadingBar />;
   if (!favorites.length) {
-    return (
-      <Fallback>
-        <Image />
-        <Title variant={"h3"} text={"Favorites is empty"} />
-      </Fallback>
-    );
+    return <Fallback text="Favorites is not found" />;
   }
   return (
     <FavoriteList

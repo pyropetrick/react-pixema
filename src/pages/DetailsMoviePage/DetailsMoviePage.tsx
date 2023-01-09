@@ -21,13 +21,13 @@ import {
   TextCell,
   WrapperRate,
 } from "./styles";
-import { LoadingBar, Title } from "components";
+import { Fallback, LoadingBar, Title } from "components";
 import { BookMarkIcon, IMDBIcon } from "assets";
 
 export const DetailsMoviePage = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams();
-  const { movie, isLoading } = useAppSelector(getMovie);
+  const { movie, isLoading, error } = useAppSelector(getMovie);
   const { isAuth } = useAppSelector(getUser);
   useEffect(() => {
     id && dispatch(getMovieById(id));
@@ -46,6 +46,7 @@ export const DetailsMoviePage = () => {
     dispatch(addFavorite(movie));
   };
   if (isLoading) return <LoadingBar />;
+  if (error) return <Fallback text="Movie is not found" />;
   return (
     <StyledDetailsMoviePage
       initial={{ opacity: 0 }}
