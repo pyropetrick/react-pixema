@@ -34,9 +34,11 @@ const movie = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(getMovieById.pending, (state, action) => {
+      state.error = null;
       state.isLoading = true;
     });
     builder.addCase(getMovieById.fulfilled, (state, { payload }) => {
+      state.error = null;
       state.isLoading = false;
       state.movie = transformMovieInfo(payload);
     });
