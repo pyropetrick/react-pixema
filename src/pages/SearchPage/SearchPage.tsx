@@ -17,7 +17,7 @@ export const SearchPage = () => {
   };
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if (year && type && name) {
+    if ((year || type) && name) {
       dispatch(fetchSearchMovies({ name, year, type, page }));
     } else name && dispatch(fetchSearchMovies({ name, page }));
   }, [dispatch, name, page, year, type]);
