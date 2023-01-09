@@ -20,7 +20,7 @@ class restMoviesAPI {
     if (data.Error) throw new Error(data.Error);
     return data;
   }
-  public async getSearchMovies({ name, type, year, page }: IRequestOption) {
+  public async getSearchMovies({ name, type = null, year = null, page }: IRequestOption) {
     const params = {
       s: name,
       type,
