@@ -44,8 +44,8 @@ export const FilterMenu = ({ toogleFilter }: IProps) => {
 
   const handleCross = () => toogleFilter();
 
-  const onSubmit: SubmitHandler<IFilterForm> = (data) => {
-    const { year, title, movieType } = data;
+  const onSubmit: SubmitHandler<IFilterForm> = (filterData) => {
+    const { year, title, movieType } = filterData;
     toogleFilter();
     navigate(
       `${generatePath(ROUTE.SEARCH, { name: title })}?${createSearchParams({
@@ -92,7 +92,7 @@ export const FilterMenu = ({ toogleFilter }: IProps) => {
                 type="number"
                 max="2023"
                 min="1970"
-                {...register("year", { required: true })}
+                {...register("year", { required: false })}
                 $error={errors.year && true}
               />
             </Label>
