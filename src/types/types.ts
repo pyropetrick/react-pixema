@@ -36,6 +36,7 @@ export interface IMovieInfoAPI {
   Response: string;
   Production?: string;
   Website?: string;
+  Error?: string;
 }
 
 export interface IMovie {
