@@ -1,4 +1,5 @@
 export * from "./Title/Title";
+export * from "./Fallback/Fallback";
 export * from "./Portal/Portal";
 export * from "./Toast/Toast";
 export * from "./RequareAuth/RequareAuth";
