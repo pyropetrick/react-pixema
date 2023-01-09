@@ -1,6 +1,6 @@
-import { LoadingBar, MovieCard, Title } from "components";
+import { Fallback, LoadingBar, MovieCard } from "components";
 import { IMovie } from "types";
-import { Fallback, StyledMovieList, Image } from "./styles";
+import { StyledMovieList } from "./styles";
 
 interface IProps {
   movies: IMovie[];
@@ -10,12 +10,7 @@ interface IProps {
 export const MovieList = ({ movies, isLoading, error }: IProps) => {
   if (isLoading) return <LoadingBar />;
   if (movies.length === 0 || error) {
-    return (
-      <Fallback>
-        <Image />
-        <Title variant={"h3"} text={"Movies not found"} />
-      </Fallback>
-    );
+    return <Fallback text="Movies not found" />;
   }
   return (
     <StyledMovieList
