@@ -11,7 +11,10 @@ export const SearchPage = () => {
   const year = searchParams.get("year");
   const type = searchParams.get("type");
   const [page, setPage] = useState<number>(1);
-  const handleShowMore = () => setPage((prevPage) => ++prevPage);
+  const handleShowMore = () => {
+    window.scrollTo({ left: 0, top: 0, behavior: "smooth" });
+    setPage((prevPage) => ++prevPage);
+  };
   const dispatch = useAppDispatch();
   useEffect(() => {
     if (year && type && name) {
@@ -22,7 +25,7 @@ export const SearchPage = () => {
   return (
     <MainPageBlock>
       <MovieList movies={movies} isLoading={isLoading} error={error} />
-      {!isLoading && !!movies.length && (
+      {!error && !isLoading && !!movies.length && (
         <Button text="Show more" type="button" variant="secondary" onClick={handleShowMore} />
       )}
     </MainPageBlock>

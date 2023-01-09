@@ -20,8 +20,9 @@ export const LoginPage = () => {
   } = useForm<ILoginData>({ mode: "onBlur" });
 
   const onSubmit: SubmitHandler<ILoginData> = (dataSignIn) => {
-    dispatch(signIn(dataSignIn));
-    reset();
+    dispatch(signIn(dataSignIn))
+      .unwrap()
+      .then((res) => reset());
   };
 
   return (

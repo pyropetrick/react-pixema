@@ -20,7 +20,7 @@ export const RegistrationPage = () => {
     handleSubmit,
     formState: { errors },
     reset,
-  } = useForm<IRegistrationData>({ mode: "onBlur" });
+  } = useForm<IRegistrationData>({ mode: "onSubmit" });
   const onSubmit: SubmitHandler<IRegistrationData> = ({
     name,
     email,
@@ -28,13 +28,20 @@ export const RegistrationPage = () => {
     passwordConfirm,
   }) => {
     if (password === passwordConfirm) {
-      dispatch(signUp({ name, email, password })).then((response) => {
-        reset();
-      });
+      dispatch(signUp({ name, email, password }))
+        .unwrap()
+        .then((response) => {
+          reset();
+        });
     } else {
       toast.warning("Passwords do not match");
     }
   };
+  if (errors.name)
+    toast.warning(
+      // eslint-disable-next-line
+      "Fullname is not correct. Please enter correct fullname in format(only Latin words): Name Surname ",
+    );
 
   return (
     <Form
@@ -46,9 +53,9 @@ export const RegistrationPage = () => {
     >
       <Title variant="h2" text="Sign Up" />
       <InputGroup>
-        <Label text="Name">
+        <Label text="Fullname">
           <Input
-            placeholder="Your name"
+            placeholder="Your fullname(Name Surname)"
             type="text"
             $error={errors.name && true}
             {...register("name", { required: true, pattern: /^[A-Z][a-z]+ [A-Z][a-z]+$/ })}
