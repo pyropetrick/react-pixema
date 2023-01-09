@@ -17,6 +17,7 @@ class restMoviesAPI {
       plot: "full",
     };
     const { data } = await this.API.get<IMovieInfoAPI>("", { params });
+    if (data.Error) throw new Error(data.Error);
     return data;
   }
   public async getSearchMovies({ name, type, year, page }: IRequestOption) {
