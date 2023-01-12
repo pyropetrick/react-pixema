@@ -43,14 +43,13 @@ export const Title = styled.h6`
 
 export const Genres = styled.p`
   color: ${Color.LIGHT};
-  /* display: flex;
+  display: flex;
   flex-wrap: wrap;
-  gap: 2px 13px; */
+  gap: 2px 13px;
   ${typography.s3}
   font-weight: 500;
 
   span {
-    margin-right: 13px;
     position: relative;
     &:after {
       content: "\u2022";
@@ -60,7 +59,6 @@ export const Genres = styled.p`
       top: 0;
     }
     &:last-child:after {
-      margin-right: 0;
       display: none;
     }
   }
