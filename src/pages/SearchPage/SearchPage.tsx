@@ -25,7 +25,7 @@ export const SearchPage = () => {
   return (
     <MainPageBlock>
       <MovieList movies={movies} isLoading={isLoading} error={error} />
-      {!error && !isLoading && !!movies.length && (
+      {!error && !isLoading && movies.length >= 9 && (
         <Button text="Show more" type="button" variant="secondary" onClick={handleShowMore} />
       )}
     </MainPageBlock>
