@@ -15,7 +15,7 @@ export const Header = () => {
   const debounceValue = useDebounce(search.value, 1000);
   const [isActive, toogleFilter] = useToogle();
   useEffect(() => {
-    debounceValue && navigate(generatePath(ROUTE.SEARCH, { name: debounceValue }));
+    debounceValue && navigate(generatePath(ROUTE.SEARCH, { title: debounceValue }));
     //eslint-disable-next-line
   }, [debounceValue]);
   const { isAuth, name, email } = useAppSelector(getUser);

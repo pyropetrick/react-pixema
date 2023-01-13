@@ -48,7 +48,7 @@ export const FilterMenu = ({ toogleFilter }: IProps) => {
     const { year, title, movieType } = filterData;
     toogleFilter();
     navigate(
-      `${generatePath(ROUTE.SEARCH, { name: title })}?${createSearchParams({
+      `${generatePath(ROUTE.SEARCH, { title })}?${createSearchParams({
         year,
         type: movieType.value,
       })}`,

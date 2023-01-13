@@ -1,9 +1,9 @@
 import { Fallback, LoadingBar, MovieCard } from "components";
-import { IMovie } from "types";
+import { ISearchMovie } from "types";
 import { StyledMovieList } from "./styles";
 
 interface IProps {
-  movies: IMovie[];
+  movies: ISearchMovie[];
   isLoading: boolean;
   error?: string | null;
 }
@@ -19,8 +19,8 @@ export const MovieList = ({ movies, isLoading, error }: IProps) => {
       transition={{ ease: "easeIn", duration: 0.5 }}
     >
       {movies &&
-        movies.map(({ imdbID, title, poster }) => (
-          <MovieCard key={imdbID} title={title} img={poster} id={imdbID} />
+        movies.map(({ id, imDbRating, title, image }) => (
+          <MovieCard key={id} title={title} img={image} id={id} rating={imDbRating} />
         ))}
     </StyledMovieList>
   );

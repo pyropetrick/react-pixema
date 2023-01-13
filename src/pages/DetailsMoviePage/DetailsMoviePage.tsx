@@ -37,8 +37,7 @@ export const DetailsMoviePage = () => {
     { title: "Released", value: movie.released },
     { title: "BoxOffice", value: movie.boxOffice },
     { title: "Country", value: movie.country },
-    { title: "Production", value: movie.production },
-    { title: "Actors", value: movie.actors },
+    { title: "Stars", value: movie.stars },
     { title: "Director", value: movie.director },
     { title: "Writers", value: movie.writer },
   ];

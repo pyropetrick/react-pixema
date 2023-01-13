@@ -2,9 +2,9 @@ import Select, { SingleValue } from "react-select";
 import { selectStyles } from "./styles";
 
 export enum MovieType {
-  MOVIES = "movie",
-  SERIES = "series",
-  EPISODE = "episode",
+  MOVIES = "tv_movie",
+  SERIES = "tv_series",
+  EPISODE = "tv_episode",
 }
 
 export interface ISelectOption {
