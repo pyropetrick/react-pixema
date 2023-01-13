@@ -9,7 +9,7 @@ export const TrendsPage = () => {
   const dispatch = useAppDispatch();
   const handleShowMore = () => setPage((prevPage) => ++prevPage);
   useEffect(() => {
-    dispatch(fetchTrends(page));
+    dispatch(fetchTrends());
   }, [dispatch, page]);
   return (
     <MainPageBlock>

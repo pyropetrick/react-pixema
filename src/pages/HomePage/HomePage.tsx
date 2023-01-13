@@ -9,8 +9,8 @@ export const HomePage = () => {
   const [page, setPage] = useState<number>(1);
   const handleShowMore = () => setPage((prevPage) => ++prevPage);
   useEffect(() => {
-    dispatch(fetchHomeMovies({ name: "batman", type: "movie", page }));
-  }, [dispatch, page]);
+    dispatch(fetchHomeMovies());
+  }, [dispatch]);
   return (
     <MainPageBlock>
       <MovieList movies={movies} isLoading={isLoading} error={error} />
