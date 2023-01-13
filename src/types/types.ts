@@ -1,14 +1,5 @@
 export type Theme = "dark" | "light";
 
-export interface IRatingAPI {
-  Source: string;
-  Value: string;
-}
-interface IRating {
-  source: string;
-  value: string;
-}
-
 interface IPeopleList {
   id: string;
   name: string;
@@ -92,7 +83,7 @@ export interface IMovieInfoAPI {
   type: string;
   year: string;
   image: string;
-  releaseData: string;
+  releaseDate: string;
   runtimeMins: string;
   runtimeStr: string;
   plot: string;
@@ -105,7 +96,7 @@ export interface IMovieInfoAPI {
   writerList: IPeopleList[];
   stars: string;
   starList: IPeopleList[];
-  actorsList: IActorsList[];
+  actorList: IActorsList[];
   fullcast: null;
   genres: string;
   genreList: IGenres[];
@@ -142,7 +133,7 @@ export interface IMovie {
   poster: string;
 }
 
-interface IResultSearch {
+export interface ISearchMovie {
   id: string;
   image: string;
   title: string;
@@ -151,7 +142,7 @@ interface IResultSearch {
   genres: string;
   genresList: IGenres[];
   contentRating: string;
-  imdbRating: string;
+  imDbRating: string;
   imDbRatingVotes: string;
   metacriticRating: string;
   plot: string;
@@ -160,60 +151,16 @@ interface IResultSearch {
 }
 export interface IResponseSearchAPI {
   queryString: string;
-  results: IResultSearch[];
-  errorMessage: string | null;
-}
-
-interface IPopularMovie {
-  id: string;
-  rank: string;
-  rankUpDown: string;
-  title: string;
-  fullTitle: string;
-  year: string;
-  image: string;
-  crew: string;
-  imDbRating: string;
-  imDbRatingCount: string;
-}
-
-interface IComingSoonMovie {
-  id: string;
-  title: string;
-  fullTitle: string;
-  year: string;
-  releaseState: string;
-  image: string;
-  runTimeMins: null;
-  runTimeStr: null;
-  plot: null;
-  contentRating: null;
-  imDbRating: null;
-  imDbRatingCount: null;
-  metacriticRating: null;
-  genres: string;
-  genresList: IGenres;
-  directors: null;
-  directorsList: IPeopleList[];
-  stars: string;
-  starList: IPeopleList[];
-}
-
-export interface IResponsePopularMovies {
-  items: IPopularMovie[];
-  errorMessage: string | null;
-}
-
-export interface IResponseComingSoonMovies {
-  items: IComingSoonMovie[];
+  results: ISearchMovie[];
   errorMessage: string | null;
 }
 
 export interface IRequestOption {
-  title: string;
-  titleType: string | null;
-  releaseData: string | null;
-  genres: string | null;
+  title?: string | null;
+  type?: string | null;
+  years?: string | null;
+  genres?: string | null;
+  groups?: string | null;
 }
 
 export interface IMovieInfo {
@@ -225,15 +172,13 @@ export interface IMovieInfo {
   genres: string[];
   director: string;
   writer: string;
-  actors: string;
+  stars: string;
   plot: string;
   country: string;
   poster: string;
   metascore: string;
   imdbRating: string;
-  totalSeasons?: string;
   boxOffice?: string;
-  production?: string;
   runTime?: string;
   similars: ISimilarMovie[];
   trailer: string;
