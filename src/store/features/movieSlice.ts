@@ -14,7 +14,7 @@ export const getMovieById = createAsyncThunk<IMovieInfoAPI, string, { rejectValu
   "movies/getMovie",
   async (id: string, { rejectWithValue }) => {
     try {
-      return await moviesApi.getMovie(id);
+      return await moviesApi.getMovieById(id);
     } catch (error) {
       const errorResponse = error as AxiosError;
       return rejectWithValue(errorResponse.message);
