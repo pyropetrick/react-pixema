@@ -218,6 +218,7 @@ export interface IRequestOption {
 
 export interface IMovieInfo {
   imdbID: string;
+  type: string;
   title: string;
   year: string;
   released: string;
@@ -228,13 +229,14 @@ export interface IMovieInfo {
   plot: string;
   country: string;
   poster: string;
-  ratings: IRating[];
   metascore: string;
   imdbRating: string;
   totalSeasons?: string;
   boxOffice?: string;
   production?: string;
   runTime?: string;
+  similars: ISimilarMovie[];
+  trailer: string;
 }
 
 export interface ISignUpData {
