@@ -1,3 +1,6 @@
+import { createSelector } from "reselect";
 import { RootState } from "store";
 
-export const getTrends = (state: RootState) => state.trends;
+const selectTrends = (state: RootState) => state.trends;
+
+export const getTrends = createSelector(selectTrends, (state) => state);

@@ -1,3 +1,6 @@
+import { createSelector } from "reselect";
 import { RootState } from "store";
 
-export const getSearchMovies = (state: RootState) => state.searchMovies;
+const selectSearchMovies = (state: RootState) => state.searchMovies;
+
+export const getSearchMovies = createSelector(selectSearchMovies, (state) => state);
