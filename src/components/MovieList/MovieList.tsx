@@ -1,4 +1,5 @@
 import { Fallback, LoadingBar, MovieCard } from "components";
+import { memo } from "react";
 import { ISearchMovie } from "types";
 import { StyledMovieList } from "./styles";
 
@@ -7,7 +8,7 @@ interface IProps {
   isLoading: boolean;
   error?: string | null;
 }
-export const MovieList = ({ movies, isLoading, error }: IProps) => {
+export const MovieList = memo(({ movies, isLoading, error }: IProps) => {
   if (isLoading) return <LoadingBar />;
   if (movies.length === 0 || error) {
     return <Fallback text="Movies not found" />;
@@ -24,4 +25,4 @@ export const MovieList = ({ movies, isLoading, error }: IProps) => {
         ))}
     </StyledMovieList>
   );
-};
+});

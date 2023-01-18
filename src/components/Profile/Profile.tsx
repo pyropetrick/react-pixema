@@ -2,6 +2,7 @@ import { ArrowDownIcon, ArrowRightIcon, UserIcon } from "assets";
 import { RouterLink } from "components";
 import { AnimatePresence } from "framer-motion";
 import { useToogle } from "hooks";
+import { memo } from "react";
 import { ROUTE } from "router";
 import { useAppDispatch, userSignOut } from "store";
 import { DropDown, DropDownItem, InnerSignIn, Name, ProfileIcon, StyledProfile } from "./styles";
@@ -12,7 +13,7 @@ interface IProps {
   email: string;
 }
 
-export const Profile = ({ name, email, isAuth }: IProps) => {
+export const Profile = memo(({ name, email, isAuth }: IProps) => {
   const dispatch = useAppDispatch();
   const [dropDownIsActive, toogleDropDown] = useToogle();
   const profileNameWords = name.split(" ");
@@ -56,4 +57,4 @@ export const Profile = ({ name, email, isAuth }: IProps) => {
       </AnimatePresence>
     </StyledProfile>
   );
-};
+});
