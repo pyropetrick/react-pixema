@@ -59,7 +59,7 @@ export const DetailsMoviePage = () => {
             alt="fallback image"
           />
         ) : (
-          <Poster src={movie.poster} alt={`poster ${movie.title}`} />
+          <Poster src={movie.poster} alt={`poster ${movie.title}`} loading="lazy" />
         )}
         <FavoriteButton onClick={handleFavorite} disabled={!isAuth}>
           <BookMarkIcon />
