@@ -18,6 +18,15 @@ export const Header = () => {
     debounceValue && navigate(generatePath(ROUTE.SEARCH, { title: debounceValue }));
     //eslint-disable-next-line
   }, [debounceValue]);
+  useEffect(() => {
+    isActive
+      ? (document.body.style.overflow = "hidden")
+      : (document.body.style.overflow = "visible");
+
+    return () => {
+      document.body.style.overflow = "visible";
+    };
+  }, [isActive]);
   const { isAuth, name, email } = useAppSelector(getUser);
   return (
     <StyledHeader>

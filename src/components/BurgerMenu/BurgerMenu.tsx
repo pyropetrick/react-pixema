@@ -4,11 +4,21 @@ import { BurgerIcon, CrossIcon } from "assets";
 import { MenuNav, Portal, Title } from "components";
 import { TargetPortal } from "config";
 import { AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
 
 export const BurgerMenu = () => {
   const [isActive, toogleBurger] = useToogle();
   const handleCross = () => toogleBurger();
   const handleBackground = () => toogleBurger();
+  useEffect(() => {
+    isActive
+      ? (document.body.style.overflow = "hidden")
+      : (document.body.style.overflow = "visible");
+
+    return () => {
+      document.body.style.overflow = "visible";
+    };
+  }, [isActive]);
   return (
     <>
       <Burger onClick={toogleBurger}>{isActive ? <CrossIcon /> : <BurgerIcon />}</Burger>
