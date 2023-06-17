@@ -1,12 +1,17 @@
 import styled from "styled-components";
 import { Color } from "config";
-import { typography } from "ui";
+import { Media, typography } from "ui";
 import { motion } from "framer-motion";
 
 export const StyledDetailsMoviePage = styled(motion.div)`
   display: grid;
   grid-template-columns: 1fr 3.5fr 1fr;
   grid-column-gap: 42px;
+  ${Media.SM} {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    grid-row-gap: 15px;
+  }
 `;
 export const Details = styled.div``;
 
