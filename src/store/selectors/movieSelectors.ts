@@ -1,2 +1,6 @@
+import { createSelector } from "reselect";
 import { RootState } from "store";
-export const getMovie = (state: RootState) => state.movie;
+
+const selectMovie = (state: RootState) => state.movie;
+
+export const getMovie = createSelector(selectMovie, (state) => state);

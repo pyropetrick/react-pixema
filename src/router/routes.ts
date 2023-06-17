@@ -1,5 +1,5 @@
 export enum ROUTE {
-  HOME = "/react-pixema/",
+  HOME = "/",
   TRENDS = "trends",
   FAVORITES = "favorites",
   SETTINGS = "settings",
@@ -7,5 +7,5 @@ export enum ROUTE {
   REGISTRATION = "registration",
   MOVIE = "movie/:id",
   RESET_PASSWORD = "password/reset",
-  SEARCH = "search/:name",
+  SEARCH = "search/:title",
 }

@@ -1,4 +1,4 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent, memo } from "react";
 import { FilterMenuIcon, SearchInput, StyledSearch } from "./styles";
 
 interface IProps {
@@ -7,7 +7,7 @@ interface IProps {
   onClick: () => void;
 }
 
-export const Search = ({ onChange, value, onClick }: IProps) => {
+export const Search = memo(({ onChange, value, onClick }: IProps) => {
   return (
     <StyledSearch>
       <SearchInput
@@ -20,4 +20,4 @@ export const Search = ({ onChange, value, onClick }: IProps) => {
       <FilterMenuIcon onClick={onClick} />
     </StyledSearch>
   );
-};
+});

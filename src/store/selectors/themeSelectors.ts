@@ -1,3 +1,6 @@
+import { createSelector } from "reselect";
 import { RootState } from "store";
 
-export const getTheme = (state: RootState) => state.theme;
+const selectTheme = (state: RootState) => state.theme;
+
+export const getTheme = createSelector(selectTheme, (state) => state);

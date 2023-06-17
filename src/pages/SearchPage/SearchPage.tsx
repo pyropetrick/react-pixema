@@ -6,10 +6,11 @@ import { useSearchParams } from "react-router-dom";
 import { MainPageBlock } from "ui";
 
 export const SearchPage = () => {
-  const { name } = useParams();
+  const { title } = useParams();
   const [searchParams] = useSearchParams();
-  const year = searchParams.get("year");
+  const years = searchParams.get("years");
   const type = searchParams.get("type");
+  const genres = searchParams.get("genres");
   const [page, setPage] = useState<number>(1);
   const handleShowMore = () => {
     window.scrollTo({ left: 0, top: 0, behavior: "smooth" });
@@ -17,10 +18,8 @@ export const SearchPage = () => {
   };
   const dispatch = useAppDispatch();
   useEffect(() => {
-    if ((year || type) && name) {
-      dispatch(fetchSearchMovies({ name, year, type, page }));
-    } else name && dispatch(fetchSearchMovies({ name, page }));
-  }, [dispatch, name, page, year, type]);
+    title && dispatch(fetchSearchMovies({ title, type, years, genres }));
+  }, [dispatch, title, page, years, type, genres]);
   const { movies, isLoading, error } = useAppSelector(getSearchMovies);
   return (
     <MainPageBlock>

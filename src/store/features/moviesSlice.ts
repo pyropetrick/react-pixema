@@ -1,24 +1,23 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
-import { moviesApi, transformMovies } from "services";
-import { IMovie, IRequestOption, IResponseSearchAPI } from "types";
+import { moviesApi } from "services";
+import { IResponseSearchAPI, ISearchMovie } from "types";
 
-export const fetchHomeMovies = createAsyncThunk<
-  IResponseSearchAPI | undefined,
-  IRequestOption,
-  { rejectValue: string }
->("movies/fetchHomeMovies", async (options, { rejectWithValue }) => {
-  try {
-    return await moviesApi.getSearchMovies(options);
-  } catch (error) {
-    const errorResponse = error as AxiosError;
-    return rejectWithValue(errorResponse.message);
-  }
-});
+export const fetchHomeMovies = createAsyncThunk<IResponseSearchAPI, void, { rejectValue: string }>(
+  "movies/fetchHomeMovies",
+  async (_, { rejectWithValue }) => {
+    try {
+      return await moviesApi.getSearchMovies({ groups: "top_250" });
+    } catch (error) {
+      const errorResponse = error as AxiosError;
+      return rejectWithValue(errorResponse.message);
+    }
+  },
+);
 
 interface IMoviesState {
-  movies: IMovie[];
+  movies: ISearchMovie[];
   isLoading: boolean;
   error: string | null;
 }
@@ -42,7 +41,7 @@ const movies = createSlice({
       if (payload) {
         state.isLoading = false;
         state.error = null;
-        state.movies = transformMovies(payload.Search);
+        state.movies = payload.results;
       }
     });
     builder.addCase(fetchHomeMovies.rejected, (state, { payload }) => {

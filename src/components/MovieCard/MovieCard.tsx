@@ -4,6 +4,7 @@ import { StyledMovieCard, Poster, Title, Genres, Rate, FavoriteButton } from "./
 import { RouterLink } from "components";
 import { BookMarkIcon } from "assets";
 import { deleteFavorite, useAppDispatch } from "store";
+import { memo } from "react";
 
 interface IProps {
   id: string;
@@ -13,7 +14,7 @@ interface IProps {
   rating?: string;
   favorite?: boolean;
 }
-export const MovieCard = ({ id, title, img, genres, rating, favorite }: IProps) => {
+export const MovieCard = memo(({ id, title, img, genres, rating, favorite }: IProps) => {
   const dispatch = useAppDispatch();
   const handleFavorite = () => {
     dispatch(deleteFavorite(id));
@@ -30,7 +31,7 @@ export const MovieCard = ({ id, title, img, genres, rating, favorite }: IProps) 
         {img === "N/A" ? (
           <Poster src={`https://via.placeholder.com/250.png?text=${title}`} alt="fallback image" />
         ) : (
-          <Poster src={img} alt={`poster ${title}`} />
+          <Poster src={img} alt={`poster ${title}`} width="266" height="357" loading="lazy" />
         )}
         <Title>{title}</Title>
         {genres && (
@@ -43,4 +44,4 @@ export const MovieCard = ({ id, title, img, genres, rating, favorite }: IProps) 
       </RouterLink>
     </StyledMovieCard>
   );
-};
+});

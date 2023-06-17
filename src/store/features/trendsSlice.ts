@@ -1,18 +1,18 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { AxiosError } from "axios";
 import { toast } from "react-toastify";
-import { moviesApi, transformMovies } from "services";
-import { IMovie, IResponseSearchAPI } from "types";
+import { moviesApi } from "services";
+import { IResponseSearchAPI, ISearchMovie } from "types";
 interface ITrendsState {
-  trends: IMovie[];
+  trends: ISearchMovie[];
   isLoading: boolean;
   error: string | null;
 }
-export const fetchTrends = createAsyncThunk<IResponseSearchAPI, number, { rejectValue: string }>(
+export const fetchTrends = createAsyncThunk<IResponseSearchAPI, void, { rejectValue: string }>(
   "trends/fetchTrends",
-  async (page, { rejectWithValue }) => {
+  async (_, { rejectWithValue }) => {
     try {
-      return await moviesApi.getSearchMovies({ name: "superman", type: "movie", page });
+      return await moviesApi.getSearchMovies({ groups: "now-playing-us" });
     } catch (error) {
       const errorResponse = error as AxiosError;
       return rejectWithValue(errorResponse.message);
@@ -38,7 +38,7 @@ const trends = createSlice({
     builder.addCase(fetchTrends.fulfilled, (state, { payload }) => {
       state.isLoading = false;
       state.error = null;
-      state.trends = transformMovies(payload.Search);
+      state.trends = payload.results;
     });
     builder.addCase(fetchTrends.rejected, (state, { payload }) => {
       if (payload) {

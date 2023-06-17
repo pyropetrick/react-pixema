@@ -4,8 +4,9 @@ import { BurgerIcon, CrossIcon } from "assets";
 import { MenuNav, Portal, Title } from "components";
 import { TargetPortal } from "config";
 import { AnimatePresence } from "framer-motion";
+import { memo } from "react";
 
-export const BurgerMenu = () => {
+export const BurgerMenu = memo(() => {
   const [isActive, toogleBurger] = useToogle();
   const handleCross = () => toogleBurger();
   const handleBackground = () => toogleBurger();
@@ -41,4 +42,4 @@ export const BurgerMenu = () => {
       </AnimatePresence>
     </>
   );
-};
+});

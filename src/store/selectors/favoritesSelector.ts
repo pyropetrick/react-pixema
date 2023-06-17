@@ -1,3 +1,6 @@
+import { createSelector } from "reselect";
 import { RootState } from "store";
 
-export const getFavorites = (state: RootState) => state.favorites;
+const selectFavorites = (state: RootState) => state.favorites;
+
+export const getFavorites = createSelector(selectFavorites, (state) => state);
