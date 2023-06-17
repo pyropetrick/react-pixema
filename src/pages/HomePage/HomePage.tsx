@@ -6,7 +6,7 @@ import { MainPageBlock } from "ui";
 export const HomePage = () => {
   const { movies, isLoading, error } = useAppSelector(getMovies);
   const dispatch = useAppDispatch();
-  const [page, setPage] = useState<number>(1);
+  const [, setPage] = useState<number>(1);
   const handleShowMore = () => setPage((prevPage) => ++prevPage);
   useEffect(() => {
     dispatch(fetchHomeMovies());
