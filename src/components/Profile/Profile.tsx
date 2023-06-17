@@ -1,8 +1,8 @@
 import { ArrowDownIcon, ArrowRightIcon, UserIcon } from "assets";
 import { RouterLink } from "components";
 import { AnimatePresence } from "framer-motion";
-import { useToogle } from "hooks";
-import { memo } from "react";
+import { useOnClickOutside, useToogle } from "hooks";
+import { memo, useRef } from "react";
 import { ROUTE } from "router";
 import { useAppDispatch, userSignOut } from "store";
 import { DropDown, DropDownItem, InnerSignIn, Name, ProfileIcon, StyledProfile } from "./styles";
@@ -15,13 +15,15 @@ interface IProps {
 
 export const Profile = memo(({ name, email, isAuth }: IProps) => {
   const dispatch = useAppDispatch();
-  const [dropDownIsActive, toogleDropDown] = useToogle();
+  const [dropDown, toogleDropDown] = useToogle();
   const profileNameWords = name.split(" ");
   const handleName = () => toogleDropDown();
   const handleLogout = () => {
     dispatch(userSignOut());
     toogleDropDown();
   };
+  const ref = useRef(null);
+  useOnClickOutside(ref, handleName);
   return (
     <StyledProfile>
       <ProfileIcon>{name ? `${name[0]}${profileNameWords[1][0]}` : <UserIcon />}</ProfileIcon>
@@ -37,10 +39,11 @@ export const Profile = memo(({ name, email, isAuth }: IProps) => {
         </RouterLink>
       )}
       <AnimatePresence>
-        {dropDownIsActive && (
+        {dropDown && (
           <DropDown
             initial="collapsed"
             animate="open"
+            ref={ref}
             exit="collapsed"
             variants={{
               open: { opacity: 1, height: "auto" },
