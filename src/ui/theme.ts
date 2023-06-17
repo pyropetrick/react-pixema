@@ -7,6 +7,7 @@ export const themeLight = css`
   --secondary-bg: ${Color.WHITE};
   --block-bg: ${Color.WHITE};
   --select-bg: ${Color.LIGHT};
+  --logo-color: ${Color.BLACK};
 `;
 export const themeDark = css`
   --primary-text: ${Color.WHITE};
@@ -14,4 +15,5 @@ export const themeDark = css`
   --secondary-bg: ${Color.GRAPHITE};
   --block-bg: ${Color.DARK};
   --select-bg: ${Color.GRAPHITE};
+  --logo-color: ${Color.WHITE}
 `;

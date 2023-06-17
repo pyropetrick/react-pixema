@@ -1,5 +1,3 @@
-import logoLight from "./img/logo-light.png";
-import logoDark from "./img/logo-dark.png";
 import bgAuth from "./img/background-auth.png";
 import fallback from "./img/fallback.png";
 import { ReactComponent as ArrowRightIcon } from "./icons/arrow-right.svg";
@@ -17,12 +15,12 @@ import { ReactComponent as ShareIcon } from "./icons/share.svg";
 import { ReactComponent as UserIcon } from "./icons/user.svg";
 import { ReactComponent as LogoutIcon } from "./icons/logout.svg";
 import { ReactComponent as SignInIcon } from "./icons/sign-in.svg";
+import { ReactComponent as LogoIcon } from "./img/pixema.svg";
 
 export {
+  LogoIcon,
   SignInIcon,
   LogoutIcon,
-  logoLight,
-  logoDark,
   bgAuth,
   fallback,
   ArrowRightIcon,
