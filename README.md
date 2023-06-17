@@ -1,6 +1,6 @@
 # Pixema
 
-[Watch](https://pyropetrick.github.io/react-pixema/)
+[Watch](https://react-pixema.netlify.app/)
 
 ## Description
 
