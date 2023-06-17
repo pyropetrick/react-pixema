@@ -1,7 +1,8 @@
+import { LogoIcon } from "assets";
 import styled from "styled-components";
 import { Media } from "ui";
 
-export const Image = styled.img`
+export const Image = styled(LogoIcon)`
   width: 158px;
   height: 40px;
   ${Media.SM} {
