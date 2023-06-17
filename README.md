@@ -1,4 +1,5 @@
 # Pixema
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7fc5b94a-10fd-4569-a413-333ce4d11234/deploy-status)](https://app.netlify.com/sites/react-pixema/deploys)
 
 [Watch](https://react-pixema.netlify.app/)
 
